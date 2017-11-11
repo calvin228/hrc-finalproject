@@ -1,7 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const mongoose = require('mongoose');
 const http = express();
+const user = require('./models/user');
+const passport = require('passport');
+const LocalStrategy   = require('passport-local');
+const passportLocalMongoose = require('passport-local-mongoose');
+
+mongoose.connect("mongodb://localhost/hrc");
+mongoose.connection.once('open', () => {
+  console.log('Connection to database success');
+}).on('error', (err) => {
+  console.log('Connection error');
+})
 
 http.set('views','views');
 http.set('view engine','ejs');
@@ -11,14 +23,21 @@ const login = require('./routes/login');
 
 
 http.use(bodyParser.json());
-http.use(bodyParser.urlencoded({extended: false}));
+http.use(bodyParser.urlencoded({extended: true}));
+http.use(passport.initialize());
+http.use(passport.session());
+
+passport.use(new LocalStrategy(user.authenticate()));
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
 // http.use('/', home);
 // http.use('/login', login);
 
 http.use(session({secret: 'iloveit'}));
 
+
 http.get('/', (req,res) => {
-  res.render('home', {user: req.session.user});
+  res.render('home', {email: req.session.email});
 })
 
 // http.get('/', (req,res) => {
@@ -33,17 +52,58 @@ http.get('/login', (req,res) => {
   res.render('login', {message: null});
 })
 
-http.post('/login', (req,res,next) => {
-  const user = req.body.user;
-  const password = req.body.password;
+http.post("/login", (req,res) => {
+  user.findOne({email: req.body.email, password: req.body.password}, (err,email) => {
+    if (err) {
+      console.log(err);
+    } else if (email){
+      req.session.email = email.email;
+      res.redirect("/");
+    } else {
+      res.send('invalid');
+    }
+  })
+});
+// http.post('/login', (req,res,next) => {
+//   const user = req.body.user;
+//   const password = req.body.password;
+//
+//   if(password !== 'rahasia' || user === ''){
+//     res.render('login', {message: "Access Denied!"})
+//   } else {
+//     req.session.user = user;
+//     res.redirect('/');
+//     next();
+//   }
+// })
 
-  if(password !== 'rahasia' || user === ''){
-    res.render('login', {message: "Access Denied!"})
-  } else {
-    req.session.user = user;
-    res.redirect('/');
+http.get('/register' ,(req,res) => {
+  res.render('register');
+})
 
+http.post('/register', (req,res) => {
+// Add more for other fields
+  if (req.body.email && req.body.password) {
+
+  var userData = {
+    email: req.body.email,
+    password: req.body.password,
   }
+
+  //use schema.create to insert data into the db
+  user.create(userData, function (err, user) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("registered");
+      res.redirect('/');
+    }
+  });
+}
+  // newUser.save().then( () => {
+  //   console.log('registered');
+  //   res.redirect('/');
+  // }) // save is async
 })
 
 // http.get('/logged', (req,res) => {

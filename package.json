@@ -7,7 +7,8 @@
     "better-sqlite3": "^4.0.3",
     "mongoose": "^4.13.0",
     "nodemon": "^1.12.1",
-    "npm": "^5.5.1"
+    "npm": "^5.5.1",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {
