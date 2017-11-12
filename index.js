@@ -3,10 +3,10 @@ const bodyParser = require('body-parser');
 const session = require('express-session');
 const mongoose = require('mongoose');
 const http = express();
-const user = require('./models/user');
-const passport = require('passport');
-const LocalStrategy   = require('passport-local');
-const passportLocalMongoose = require('passport-local-mongoose');
+const User = require('./models/user');
+// const passport = require('passport');
+// const LocalStrategy   = require('passport-local');
+// const passportLocalMongoose = require('passport-local-mongoose');
 
 mongoose.connect("mongodb://localhost/hrc");
 mongoose.connection.once('open', () => {
@@ -21,15 +21,15 @@ http.set('view engine','ejs');
 const home = require('./routes/home');
 const login = require('./routes/login');
 
-
+http.use(express.static('public'));
 http.use(bodyParser.json());
 http.use(bodyParser.urlencoded({extended: true}));
-http.use(passport.initialize());
-http.use(passport.session());
+// http.use(passport.initialize());
+// http.use(passport.session());
 
-passport.use(new LocalStrategy(user.authenticate()));
-passport.serializeUser(user.serializeUser());
-passport.deserializeUser(user.deserializeUser());
+// passport.use(new LocalStrategy(user.authenticate()));
+// passport.serializeUser(user.serializeUser());
+// passport.deserializeUser(user.deserializeUser());
 // http.use('/', home);
 // http.use('/login', login);
 
@@ -53,7 +53,7 @@ http.get('/login', (req,res) => {
 })
 
 http.post("/login", (req,res) => {
-  user.findOne({email: req.body.email, password: req.body.password}, (err,email) => {
+  User.findOne({email: req.body.email, password: req.body.password}, (err,email) => {
     if (err) {
       console.log(err);
     } else if (email){
@@ -83,37 +83,26 @@ http.get('/register' ,(req,res) => {
 
 http.post('/register', (req,res) => {
 // Add more for other fields
+
   if (req.body.email && req.body.password) {
 
-  var userData = {
-    email: req.body.email,
-    password: req.body.password,
-  }
-
-  //use schema.create to insert data into the db
-  user.create(userData, function (err, user) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log("registered");
-      res.redirect('/');
+    var userData = {
+      email: req.body.email,
+      password: req.body.password,
     }
-  });
-}
-  // newUser.save().then( () => {
-  //   console.log('registered');
-  //   res.redirect('/');
-  // }) // save is async
+    User.create({email: userData.email, password:userData.password}, (err,user) => {
+      if (err) {
+        console.log(err)
+        console.log("email existed, input another one")
+        res.redirect("/register");
+      } else {
+        req.session.email = userData.email;
+        console.log("User registered")
+        res.redirect("/");
+      }
+    })
+  }
 })
-
-// http.get('/logged', (req,res) => {
-//   if (req.session.email) {
-//     res.write('<h1>Logged In</h1><a href="/logout">Logout</a>');
-//     res.end();
-//   } else {
-//     res.write('<h1>User not logged In</h1><a href="/">Main Page</a>');
-//   }
-// })
 
 http.get('/logout', (req,res) => {
   req.session.destroy();
