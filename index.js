@@ -4,7 +4,8 @@ const session = require('express-session');
 const mongoose = require('mongoose');
 const http = express();
 const User = require('./models/user');
-const bcrypt = require("bcrypt");
+const methodOverride = require("method-override");
+// const bcrypt = require("bcrypt");
 // const passport = require('passport');
 // const LocalStrategy   = require('passport-local');
 // const passportLocalMongoose = require('passport-local-mongoose');
@@ -25,6 +26,7 @@ const login = require('./routes/login');
 http.use(express.static('public'));
 http.use(bodyParser.json());
 http.use(bodyParser.urlencoded({extended: true}));
+http.use(methodOverride("_method"));
 // http.use(passport.initialize());
 // http.use(passport.session());
 
@@ -38,7 +40,7 @@ http.use(session({secret: 'iloveit'}));
 
 
 http.get('/', (req,res) => {
-  res.render('home', {firstname: req.session.firstname});
+  res.render('home', {name: req.session.name});
 })
 
 http.get('/login', (req,res) => {
@@ -50,7 +52,7 @@ http.post("/login", (req,res) => {
     if (err) {
       console.log(err);
     } else if (user){
-      req.session.firstname = user.firstName;
+      req.session.name = user.name;
       req.session.email = user.email;
       res.redirect("/");
     } else {
@@ -66,17 +68,16 @@ http.get('/register' ,(req,res) => {
 
 http.post('/register', (req,res) => {
 // Add more for other fields
-  if (req.body.firstname && req.body.lastname && req.body.email && req.body.gender && req.body.dob && req.body.password) {
+  if (req.body.name && req.body.email && req.body.gender && req.body.dob && req.body.password) {
 
     var userData = {
-      firstName: req.body.firstname,
-      lastName: req.body.lastname,
+      name: req.body.name,
       email: req.body.email,
       gender: req.body.gender,
       dob: req.body.dob,
       password: req.body.password,
     }
-    User.create({firstName: userData.firstName,lastName: userData.lastName,
+    User.create({name: userData.name,
                  email: userData.email,gender: userData.gender,
                  dob: userData.dob, password:userData.password}, (err,user) => {
       if (err) {
@@ -84,7 +85,7 @@ http.post('/register', (req,res) => {
         console.log("email existed, input another one")
         res.redirect("/register");
       } else {
-        req.session.firstname = userData.firstName;
+        req.session.name = userData.name;
         req.session.email = userData.email;
         console.log("User registered")
         res.redirect("/");
@@ -99,18 +100,44 @@ http.get("/profile", (req,res) => {
     res.redirect("/login");
   } else {
     User.find({email: req.session.email}, (err,user) => {
-      console.log(user[0]);
-      res.render("profile", {userdata: user[0], firstname: req.session.firstname});
+      res.render("profile", {userdata: user[0], name: req.session.name});
     })
   }
 
 })
-http.get("/profile/edit", (req,reshnbl) => {
-  res.render("editprofile", {firstname: req.session.firstname});
+http.get("/profile/edit", (req,res) => {
+  User.findOne({email: req.session.email} , (err,user) => {
+    if(err){
+      console.log(err)
+    } else if (user) {
+      var userData = {
+        name: user.name,
+        email: user.email,
+        gender: user.gender,
+        dob: user.dob,
+        password: user.password
+      }
+      res.render("editprofile", {userData: userData, name:req.session.name})
+    }
+  })
+
 })
 
 http.put("/profile/edit", (req,res) => {
-
+  User.findOneAndUpdate({email: req.session.email}, { "$set": {
+    "name": req.body.name,
+    "email": req.body.email,
+    "dob": req.body.dob,
+    "password": req.body.password
+  }}, (err,user) => {
+    if (err) {
+      console.log(err);
+    } else if (user) {
+      // validate if email has been used or not
+      // req.session.email = req.body.email;
+      res.redirect("/profile");
+    }
+  })
 })
 
 http.get('/logout', (req,res) => {

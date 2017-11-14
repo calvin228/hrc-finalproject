@@ -6,8 +6,16 @@
   </head>
   <body>
     <% include partials/header %>
-    <form method="post" action="">
-
+    <form method="post" action="/profile/edit?_method=PUT">
+      <span>Name : <%= userData.name %></span><br />
+      <label>Email</label><br />
+      <input type='email' name="email" value="<%= userData.email %>"/><br />
+      <span>Gender : <%= userData.gender %></span><br />
+      <label>Date Of Birth</label><br />
+      <input type="date" name="dob" value="<%= userData.dob %>"/><br />
+      <label>Passsword</label><br /><!-- Don't use this whenever password is encrypted -->
+      <input type="password" name='password' value="<%= userData.password %>"/><br />
+      <input type="submit" name="update" value="Update"/>
     </form>
   </body>
 </html>
