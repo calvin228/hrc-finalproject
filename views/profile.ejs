@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HRC - <%= userdata.firstName %> <%= userdata.lastName %></title>
+  </head>
+  <body>
+    <% include partials/header %>
+    <span>First Name : <%= userdata.firstName %></span><br />
+    <span>Last Name : <%= userdata.lastName %></span><br />
+    <span>Email : <%= userdata.email %></span><br />
+    <span>Gender : <%= userdata.gender %></span><br />
+    <span>Date Of Birth : <%= userdata.dob %></span><br />
+  </body>
+</html>

@@ -7,18 +7,20 @@
   </head>
   <body>
     <form method='post' action="/register">
-      <!-- <label>First Name</label>
-      <input type="text" name='firstname' />
-      <label>Last Name</label>
-      <input type="text" name='lastname' /> -->
-      <label>Email</label>
-      <input type='email' name="email" />
-      <!-- <label>Gender</label>
+      <label>First Name</label><br />
+      <input type="text" name='firstname' required/><br />
+      <label>Last Name</label><br />
+      <input type="text" name='lastname' required/><br />
+      <label>Email</label><br />
+      <input type='email' name="email" required/><br />
+      <label>Gender</label><br />
       <input type="radio" name="gender" value="male">Male<br />
-      <input type="radio" name="gender" value="female">Female<br /> -->
-      <label>Passsword</label>
-      <input type="password" name='password' />
-      <input type="submit" name="register" value="register" />
+      <input type="radio" name="gender" value="female">Female<br />
+      <label>Date Of Birth</label><br />
+      <input type="date" name="dob" required/><br />
+      <label>Passsword</label><br />
+      <input type="password" name='password' /><br />
+      <input type="submit" name="register" value="register"  required/>
     </form>
       <!-- nama depan, nama blkg, email, jenis kelamin, tanggal lahir, password,  -->
       <!-- register button  > redirect home page -->
