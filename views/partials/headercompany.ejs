@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <div class="container-fluid">
+      <% if (name_company === undefined) {%>
+        <a href="/login">Login</a>
+        <a href="/register">Sign Up</a>
+      <% } else { %>
+        <span>Hello </span><a href="#"><%= name_company %></a>
+        <a href="/logout">Logout</a>
+      <% } %>
+    </div>
+  </body>
+</html>

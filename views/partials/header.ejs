@@ -6,11 +6,11 @@
   </head>
   <body>
     <div class="container-fluid">
-      <% if (name === undefined) {%>
+      <% if (name_user === undefined) {%>
         <a href="/login">Login</a>
         <a href="/register">Sign Up</a>
       <% } else { %>
-        <span>Hello </span><a href="/profile"><%= name %></a>
+        <span>Hello </span><a href="/profile"><%= name_user %></a>
         <a href="/logout">Logout</a>
       <% } %>
     </div>

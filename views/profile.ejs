@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>HRC - <%= userdata.name %></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g=" crossorigin="anonymous"></script>
   </head>
   <body>
     <% include partials/header %>
@@ -10,6 +12,9 @@
     <span>Email : <%= userdata.email %></span><br />
     <span>Gender : <%= userdata.gender %></span><br />
     <span>Date Of Birth : <%= userdata.dob %></span><br />
+    <span>Hire Allowance : <%= userdata.hire_allow %></span>
+    <span>Job type : <%= userdata.job_type %></span>
     <a href="/profile/edit">Update your profile here</a>
+
   </body>
 </html>

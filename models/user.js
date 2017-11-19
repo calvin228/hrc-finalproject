@@ -9,6 +9,8 @@ var userSchema = new Schema({
   },
   gender: String,
   dob: String,
+  hire_allow: String,
+  job_type: String,
   password: {
     type : String, required : true
   }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HRC - Create Job</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  </head>
+  <body>
+    <%- include partials/headercompany %>
+    <h1>Create your job below</h1>
+    <div class="container">
+      <form method="post" action="/company/createjob" >
+        <div class="form-group">
+          <label class="col-form-label">Job Title : </label>
+          <input type="text" class="form-control" name="job_title" required/><br />
+        </div>
+        <div class="form-group">
+          <label>Salary : Rp.</label>
+          <input type="number" class="form-control" name="salary" required/><br />
+        </div>
+        <div class="form-group">
+          <label>Education : </label>
+          <select class="form-control" name="education" required>
+            <option value="SMA">SMA</option>
+            <option value="S1">S1</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Location : </label>
+          <select class="form-control" name="location" required>
+            <option value="Medan">
+              Medan
+            </option>
+            <option value="Pematang Siantar">Pematang Siantar</option>
+            <option value="Binjai">Binjai</option>
+          </select><br />
+        </div>
+        <div class="form-group">
+          <label>Job Type : </label>
+          <select class="form-control" name="job_type" required>
+            <option value="Full-time">Full-time</option>
+            <option value="Part-time">Part-time</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Requirements</label><br />
+          <label>Min Age : </label>
+          <input type="number" class="form-control" name="minage" required/><br />
+        </div>
+        <div class="form-group">
+          <label>Max Age : </label>
+          <input type="number" class="form-control" name="maxage" required/><br />
+        </div>
+        <div class="form-group">
+          <label>Required Experience : </label>
+          <input type="number" class="form-control" name="exp" required/><label> year(s)</label><br />
+        </div>
+        <div class="form-group">
+          <label>Skill : </label>
+          <select class="form-control" name="skill" required>
+            <option value="IT">IT</option>
+            <option value="Economy">Economy</option>
+          </select><br />
+        </div>
+        <div class="form-group">
+          <label>Language : </label>
+          <select class="form-control" name="language" required>
+            <option value="English">English</option>
+            <option value="Indonesia">Indonesia</option>
+          </select><br />
+        </div>
+        <div class="form-group">
+          <label>Description : </label>
+          <textarea class="form-control" name="description"></textarea>
+        </div>
+        <div class="form-group">
+          <input class="form-control" type="submit" value="Create" />
+        </div>
+      </form>
+
+    </div>
+
+  </body>
+</html>

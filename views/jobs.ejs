@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HRC - Job Lists</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  </head>
+  <body>
+    <%- include partials/header %>
+    <%- include partials/nav %>
+    <div class="container">
+      <div class="form-group">
+        <input type="search" class="form-control" name="search" placeholder="Search Jobs...." />
+        
+      </div>
+
+      <% for (i=0; i < jobdata.length; i++) { %>
+        <div class="row">
+          <h4><%= jobdata[i].title %></h4>
+          <p style="color:grey"><%= jobdata[i].company_name %></p>
+          <p>
+            <%= jobdata[i].location %>
+          </p>
+          <p>
+            <%= jobdata[i].description %>
+          </p>
+          <button type="submit" name="apply">Apply Now</button>
+        </div>
+      <% } %>
+    </div>
+  </body>
+</html>

@@ -13,6 +13,22 @@
       <span>Gender : <%= userData.gender %></span><br />
       <label>Date Of Birth</label><br />
       <input type="date" name="dob" value="<%= userData.dob %>"/><br />
+      <label>Hire Allowance : </label>
+      <% if (userData.hire_allow === "Yes") { %>
+        <input type="radio" name="hire_allow" value="Yes" checked>Yes
+        <input type="radio" name="hire_allow" value="No">No<br  />
+      <% } else if (userData.hire_allow === "No") {%>
+        <input type="radio" name="hire_allow" value="Yes">Yes
+        <input type="radio" name="hire_allow" value="No" checked>No<br  />
+      <% } %>
+      <label>Job Type :</label>
+      <% if (userData.job_type === "Full-time") { %>
+        <input type="radio" name="job_type" value="Full-time" checked/>Full-time<br />
+        <input type="radio" name="job_type" value="Part-time" />Part-time<br />
+      <% } else if (userData.job_type === "Part-time") {%>
+        <input type="radio" name="job_type" value="Full-time" />Full-time<br />
+        <input type="radio" name="job_type" value="Part-time" checked/>Part-time<br />
+      <% } %>
       <label>Passsword</label><br /><!-- Don't use this whenever password is encrypted -->
       <input type="password" name='password' value="<%= userData.password %>"/><br />
       <input type="submit" name="update" value="Update"/>
