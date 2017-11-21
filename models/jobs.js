@@ -16,7 +16,8 @@ var jobsSchema = new Schema({
     education : String,
     skill : String,
     language : String,
-  }
+  },
+  applied_email : String
   // job title, salary, location, company name, job type, requirement
 })
 

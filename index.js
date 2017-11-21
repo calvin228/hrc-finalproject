@@ -249,20 +249,60 @@ http.post("/company/createjob", (req,res) => {
       }
 })
 
+
 http.get('/jobs', (req,res) => {
-    Jobs.find({}, (err,jobs) => {
-      if (err){
-        console.log(err)
-      } else {
-        res.render("jobs", {jobdata: jobs, name_user: req.session.name_user})
-      }
-    })
+    // if () {
+      // console.log("you are here")
+      // Jobs.find({title : "/"+req.query.title+"/i"}, (err,jobs) => {
+      //   if (err){
+      //     console.log(err)
+      //   } else {
+      //     res.render("jobs", {jobdata: jobs, name_user: req.session.name_user})
+      //   }
+      // })
+    // } else {
+      Jobs.find({}, (err,jobs) => {
+        if (err){
+          console.log(err)
+        } else {
+          res.render("jobs", {jobdata: jobs, name_user: req.session.name_user})
+        }
+      })
+    // }
+
+})
+// http.post("/jobs", (req,res) => {
+//
+// })
+
+http.get("/jobs/:id", (req,res) => {
+  var id = req.params.id
+  Jobs.findOne({_id: id}, (err,jobs) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.render("jobdetail", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user})
+    }
+  })
 })
 
+http.put("/jobs/:id", (req,res) => {
+  var id = req.params.id
+  Jobs.findOneAndUpdate({_id: id},{"$push" : { applied_email: req.session.email_user}},(err,jobs) => {
+    if (err) {
+      console.log(err)
+    } else {
+      //TODO : Validate if user has login or not
+      console.log(req.session.email_user);
+      res.send("Jobs Applied")
+    }
+  })
+})
 http.get('/logout', (req,res) => {
   req.session.destroy();
   res.redirect('/')
 })
+
 
 http.listen(3000, () => {
   console.log("listening to 3000");

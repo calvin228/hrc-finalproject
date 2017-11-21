@@ -4,19 +4,22 @@
     <meta charset="utf-8">
     <title>HRC - Job Lists</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
   </head>
   <body>
     <%- include partials/header %>
     <%- include partials/nav %>
     <div class="container">
-      <div class="form-group">
-        <input type="search" class="form-control" name="search" placeholder="Search Jobs...." />
-        
-      </div>
+      <!-- <div class="form-group"> -->
+        <!-- <input type="search" class="form-control" id="search" name="search" placeholder="Search Jobs...." /> -->
+        <!-- <button class="fa fa-search" type="submit" onclick="search()"></button> -->
+        <!-- <label>Filter By : </label> -->
+        <!-- <button></button> -->
+      <!-- </div> -->
 
       <% for (i=0; i < jobdata.length; i++) { %>
         <div class="row">
-          <h4><%= jobdata[i].title %></h4>
+          <h4><a href="/jobs/<%=jobdata[i]._id %>"><%= jobdata[i].title %></a></h4>
           <p style="color:grey"><%= jobdata[i].company_name %></p>
           <p>
             <%= jobdata[i].location %>
@@ -24,9 +27,16 @@
           <p>
             <%= jobdata[i].description %>
           </p>
-          <button type="submit" name="apply">Apply Now</button>
+          <!-- <button type="submit" name="apply">Apply Now</button> -->
         </div>
       <% } %>
     </div>
   </body>
+  <script>
+  function search() {
+    var search = document.getElementById("search");
+    window.location = "?title="+search.value;
+  }
+
+  </script>
 </html>

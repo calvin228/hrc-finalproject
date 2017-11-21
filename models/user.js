@@ -13,7 +13,8 @@ var userSchema = new Schema({
   job_type: String,
   password: {
     type : String, required : true
-  }
+  },
+  // applied_job : String
 })
 
 
