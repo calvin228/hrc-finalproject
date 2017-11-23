@@ -288,15 +288,15 @@ http.get("/jobs/:id", (req,res) => {
 
 http.put("/jobs/:id", (req,res) => {
   var id = req.params.id
-  Jobs.findOneAndUpdate({_id: id},{"$push" : { applied_email: req.session.email_user}},(err,jobs) => {
+  Jobs.findOneAndUpdate({_id: id},{"$push" : {candidate_email : req.session.email_user}},(err,jobs) => {
     if (err) {
       console.log(err)
     } else {
       //TODO : Validate if user has login or not
-      console.log(req.session.email_user);
-      res.send("Jobs Applied")
+      res.send("Job Applied ");
     }
   })
+
 })
 http.get('/logout', (req,res) => {
   req.session.destroy();

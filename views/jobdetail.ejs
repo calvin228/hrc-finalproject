@@ -18,7 +18,7 @@
             <p>
               Your description here
             </p>
-            <% if (jobdata.applied_email.includes(email_user)) { %>
+            <% if (jobdata.candidate_email.includes(email_user)) { %>
               <button type='submit' name="Applied" disabled>Applied</button>
             <% } else { %>
               <button type='submit' name="Apply now">Apply now</button>

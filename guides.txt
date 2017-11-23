@@ -1,0 +1,12 @@
+Untuk buka project , pertama import database hrcusers.json ,hrccompanies.json & hrcjobs.json 
+1.Copy file ke C:/Program Files/MongoDb/Server/3.4/bin
+2.ketik "mongoimport.exe -d hrc -c users -f hrcusers.json"
+3.jika error "tidak ada koneksi" , maka connect ke db dgn cara:
+	1."cd" sampai masuk ke "C:/Program Files/MongoDb/Server/3.4/bin"
+	2.ketik "mongod.exe"
+	3.selesai
+4.ketik "mongoimport.exe -d hrc -c jobs -f hrcjobs.json"
+5.ketik "mongoimport.exe -d hrc -c companies -f hrccompanies.json"
+6.kemudian run nodejs seperti biasa, "node index.js"
+
+
