@@ -7,6 +7,7 @@ Untuk buka project , pertama import database hrcusers.json ,hrccompanies.json & 
 	3.selesai
 4.ketik "mongoimport.exe -d hrc -c jobs -f hrcjobs.json"
 5.ketik "mongoimport.exe -d hrc -c companies -f hrccompanies.json"
-6.kemudian run nodejs seperti biasa, "node index.js"
+6.masuk ke folder HRC melalui cmd & ketik "npm install" untuk install node_modules 
+7.kemudian run nodejs seperti biasa, "node index.js"
 
 

@@ -217,7 +217,7 @@ http.post("/company/createjob", (req,res) => {
           job_title : req.body.job_title,
           salary : req.body.salary,
           location : req.body.location,
-          company_name : req.session.name_company,
+          company_email : req.session.email_company,
           job_type : req.body.job_type,
           description : req.body.description,
           requirement : {
@@ -230,7 +230,7 @@ http.post("/company/createjob", (req,res) => {
           }
         }
         Jobs.create({title : jobData.job_title, salary: jobData.salary, location: jobData.location,
-        company_name: jobData.company_name, job_type: jobData.job_type, description : jobData.description,
+        company_email: jobData.company_email, job_type: jobData.job_type, description : jobData.description,
         requirement: {
           minAge : jobData.requirement.minage,
           maxage : jobData.requirement.maxage,
@@ -288,7 +288,7 @@ http.get("/jobs/:id", (req,res) => {
 
 http.put("/jobs/:id", (req,res) => {
   var id = req.params.id
-  Jobs.findOneAndUpdate({_id: id},{"$push" : {candidate_email : req.session.email_user}},(err,jobs) => {
+  Jobs.findOneAndUpdate({_id: id},{"$push" : {candidate_email : req.session.email_user, candidate_name: req.session.name_user}},(err,jobs) => {
     if (err) {
       console.log(err)
     } else {
@@ -298,6 +298,28 @@ http.put("/jobs/:id", (req,res) => {
   })
 
 })
+
+http.get("/company/jobstatus", (req,res) => {
+  Jobs.find({company_email: req.session.email_company}, (err,jobs) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.render("jobstatus", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company})
+    }
+  })
+})
+
+http.get("/company/jobstatus/:id", (req,res) => {
+  var id = req.params.id
+  Jobs.findOne({_id: id}, (err, jobs) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.render("jobstatusdetail", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company})
+    }
+  })
+})
+
 http.get('/logout', (req,res) => {
   req.session.destroy();
   res.redirect('/')

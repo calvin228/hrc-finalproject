@@ -6,7 +6,7 @@ var jobsSchema = new Schema({
   title : String,
   salary : Number,
   location : String,
-  company_id : String,
+  company_email : String,
   job_type : String,
   description : String,
   requirement : {
@@ -17,7 +17,9 @@ var jobsSchema = new Schema({
     skill : String,
     language : String,
   },
-  candidate_email : [String]
+  candidate_email : [String],
+  candidate_name : [String],
+  posted_at : { type: Date, required: true, default: Date.now }
   // job title, salary, location, company name, job type, requirement
 })
 
