@@ -18,11 +18,11 @@
             <p>
               Your description here
             </p>
-            <% if (jobdata.candidate_email.includes(email_user)) { %>
-              <button type='submit' name="Applied" disabled>Applied</button>
-            <% } else { %>
-              <button type='submit' name="Apply now">Apply now</button>
-            <% } %>
+              <% if (jobdata.candidate.filter( x => x.email === email_user ).length > 0) { %>
+                <button type='submit' name="Applied" disabled>Applied</button>
+              <% } else { %>
+                <button type='submit' name="Apply now">Apply now</button>
+              <% } %>
           </form>
         </div>
       </div>

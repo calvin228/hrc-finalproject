@@ -4,6 +4,13 @@
     <meta charset="utf-8">
     <title>HRC - <%= jobdata.title %></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script
+			  src="https://code.jquery.com/jquery-3.2.1.slim.js"
+			  integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
+			  crossorigin="anonymous"></script>
+    <script>
+
+    </script>
   </head>
   <body>
     <%- include partials/headercompany %>
@@ -33,19 +40,32 @@
       <p>
         <%= jobdata.description %>
       </p>
-      <% for (i = 0; i < jobdata.candidate_name.length ; i++) { %>
-        <div class="col-xs-8">
-          <span><%= jobdata.candidate_name[i] %></span>
-        </div>
-        <div class="col-xs-2">
-          <button type="submit" value="Process to interview">Process to interview</button>
-        </div>
-        <!-- Alternatif lain selain reject -->
-        <div class="col-xs-2">
-          <button type="submit" value="Reject">Reject</button>
-        </div>
+      <% for (i = 0; i < jobdata.candidate.length ; i++) { %>
+        <% if (jobdata.candidate[i].status === "In Process") { %>
+          <div class="col-xs-8">
+            <span><%= jobdata.candidate[i].name %></span>
+            <span><%= jobdata.candidate[i].email %></span>
+          </div>
+          <form method="post" action="/company/jobstatus/<%= jobdata._id %>/<%= jobdata.candidate[i].email %>">
+          <div class="col-xs-2">
+            <select name="decision">
+              <option value="Process to Interview">
+                Process to Interview
+              </option>
+              <option value="Reject">
+                Reject
+              </option>
+            </select>
+          </div>
+
+          <div class="col-xs-2">
+            <button type="submit" name="process" value="Process">Process</button>
+          </div>
+          </form>
+        <% } else { %>
+
+        <% } %>
       <% } %>
     </div>
-
   </body>
 </html>

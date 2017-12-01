@@ -10,7 +10,8 @@ var companySchema = new Schema({
   },
   password: {
     type : String, required : true
-  }
+  },
+  phone_number: String
 })
 
 

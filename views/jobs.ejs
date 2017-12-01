@@ -10,13 +10,14 @@
     <%- include partials/header %>
     <%- include partials/nav %>
     <div class="container">
-      <!-- <div class="form-group"> -->
-        <!-- <input type="search" class="form-control" id="search" name="search" placeholder="Search Jobs...." /> -->
-        <!-- <button class="fa fa-search" type="submit" onclick="search()"></button> -->
-        <!-- <label>Filter By : </label> -->
-        <!-- <button></button> -->
-      <!-- </div> -->
-
+      <form method="GET" action="/search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search job..." name="search"/>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">Search</button>
+          </span>
+        </div>
+      </form>
       <% for (i=0; i < jobdata.length; i++) { %>
         <div class="row">
           <h4><a href="/jobs/<%=jobdata[i]._id %>"><%= jobdata[i].title %></a></h4>
@@ -32,11 +33,5 @@
       <% } %>
     </div>
   </body>
-  <script>
-  function search() {
-    var search = document.getElementById("search");
-    window.location = "?title="+search.value;
-  }
 
-  </script>
 </html>

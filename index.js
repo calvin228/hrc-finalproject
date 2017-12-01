@@ -50,10 +50,12 @@ http.get('/login', (req,res) => {
 })
 
 http.get('/login/user', (req,res) => {
+  // TODO : redirect to previous opened page if possible
   res.render('loginuser', {message: null});
 })
 
 http.post("/login/user", (req,res) => {
+
   User.findOne({email: req.body.email, password: req.body.password, }, (err,user) => {
     if (err) {
       console.log(err);
@@ -82,6 +84,7 @@ http.post("/login/company", (req,res) => {
     } else if (user){
       req.session.name_company = user.name;
       req.session.email_company = user.email;
+      req.session.phone_company = user.phone_number;
       res.redirect("/company");
     } else {
       res.send('invalid');
@@ -98,20 +101,22 @@ http.get("/register/user" , (req,res) => {
 
 http.post('/register/user', (req,res) => {
 // Add more for other fields
-  if (req.body.name && req.body.email && req.body.gender && req.body.dob && req.body.job_type && req.body.password) {
+  if (req.body.name && req.body.email && req.body.gender && req.body.dob && req.body.phone && req.body.job_type && req.body.password) {
 
     var userData = {
       name: req.body.name,
       email: req.body.email,
       gender: req.body.gender,
       dob: req.body.dob,
+      phone_number: req.body.phone,
       hire_allow: "Yes",
       job_type: req.body.job_type,
       password: req.body.password,
     }
     User.create({name: userData.name,
                  email: userData.email,gender: userData.gender,
-                 dob: userData.dob, hire_allow: userData.hire_allow, job_type: req.body.job_type, password:userData.password}, (err,user) => {
+                 dob: userData.dob, hire_allow: userData.hire_allow, job_type: req.body.job_type,
+                 phone_number: userData.phone_number, password:userData.password}, (err,user) => {
       if (err) {
         console.log(err)
         console.log("email existed, input another one")
@@ -131,15 +136,16 @@ http.get('/register/company', (req,res) => {
 })
 
 http.post("/register/company", (req,res) => {
-  if(req.body.company_name && req.body.company_address && req.body.email && req.body.password) {
+  if(req.body.company_name && req.body.company_address && req.body.phone_number && req.body.email && req.body.password) {
     var companyData = {
       name : req.body.company_name,
       address : req.body.company_address,
       email : req.body.email,
+      phone_number: req.body.phone_number,
       password : req.body.password
     }
     CompanyUser.create({name: companyData.name, address: companyData.address,
-    email: companyData.email, password: companyData.password}, (err,user) => {
+    email: companyData.email, phone_number: companyData.phone_number, password: companyData.password}, (err,user) => {
       if (err){
         console.log(err)
         console.log("email is existed, please input another email")
@@ -164,22 +170,27 @@ http.get("/profile", (req,res) => {
 
 })
 http.get("/profile/edit", (req,res) => {
-  User.findOne({email: req.session.email_user} , (err,user) => {
-    if(err){
-      console.log(err)
-    } else if (user) {
-      var userData = {
-        name: user.name,
-        email: user.email,
-        gender: user.gender,
-        dob: user.dob,
-        hire_allow: user.hire_allow,
-        job_type: user.job_type,
-        password: user.password
+  if (req.session.name_user) {
+    User.findOne({email: req.session.email_user} , (err,user) => {
+      if(err){
+        console.log(err)
+      } else if (user) {
+        var userData = {
+          name: user.name,
+          email: user.email,
+          gender: user.gender,
+          dob: user.dob,
+          hire_allow: user.hire_allow,
+          job_type: user.job_type,
+          phone_number: user.phone_number,
+          password: user.password
+        }
+        res.render("editprofile", {userData: userData, name_user:req.session.name_user})
       }
-      res.render("editprofile", {userData: userData, name_user:req.session.name_user})
-    }
-  })
+    })
+  } else {
+    res.redirect('/login/user')
+  }
 
 })
 
@@ -187,6 +198,7 @@ http.put("/profile/edit", (req,res) => {
   User.findOneAndUpdate({email: req.session.email_user}, { "$set": {
     "email": req.body.email,
     "dob": req.body.dob,
+    "phone_number": req.body.phone,
     "hire_allow": req.body.hire_allow,
     "job_type": req.body.job_type,
     "password": req.body.password
@@ -194,8 +206,7 @@ http.put("/profile/edit", (req,res) => {
     if (err) {
       console.log(err);
     } else if (user) {
-      //TODO : validate if email has been used or not
-      // req.session.email = req.body.email;
+      //TODO : validate if email has been used or
       res.redirect("/profile");
     }
   })
@@ -251,16 +262,6 @@ http.post("/company/createjob", (req,res) => {
 
 
 http.get('/jobs', (req,res) => {
-    // if () {
-      // console.log("you are here")
-      // Jobs.find({title : "/"+req.query.title+"/i"}, (err,jobs) => {
-      //   if (err){
-      //     console.log(err)
-      //   } else {
-      //     res.render("jobs", {jobdata: jobs, name_user: req.session.name_user})
-      //   }
-      // })
-    // } else {
       Jobs.find({}, (err,jobs) => {
         if (err){
           console.log(err)
@@ -268,54 +269,112 @@ http.get('/jobs', (req,res) => {
           res.render("jobs", {jobdata: jobs, name_user: req.session.name_user})
         }
       })
-    // }
-
 })
-// http.post("/jobs", (req,res) => {
-//
-// })
 
 http.get("/jobs/:id", (req,res) => {
-  var id = req.params.id
-  Jobs.findOne({_id: id}, (err,jobs) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.render("jobdetail", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user})
-    }
-  })
+  if (req.session.name_user){
+    var id = req.params.id
+
+    Jobs.findOne({_id: id}, (err,jobs) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.render("jobdetail", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user})
+      }
+    })
+  } else {
+    res.redirect("/login/user");
+  }
+
 })
 
 http.put("/jobs/:id", (req,res) => {
-  var id = req.params.id
-  Jobs.findOneAndUpdate({_id: id},{"$push" : {candidate_email : req.session.email_user, candidate_name: req.session.name_user}},(err,jobs) => {
+  var id = req.params.id;
+  Jobs.findOneAndUpdate({_id: id},{ $push : {candidate: {email: req.session.email_user,
+  name: req.session.name_user, status: "In Process"}}},(err,jobs) => {
     if (err) {
       console.log(err)
     } else {
-      //TODO : Validate if user has login or not
+      //TODO : Validate if user has login or not (DONE)
       res.send("Job Applied ");
     }
   })
 
 })
 
+http.get("/search", (req,res) => {
+  var search = req.body.search;
+  if (req.query.search){
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    Jobs.find({"title": regex}, (err, jobs) => {
+      if (err){
+        console.log(err)
+      } else {
+        res.render("jobs", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user});
+      }
+    })
+  }
+})
 http.get("/company/jobstatus", (req,res) => {
-  Jobs.find({company_email: req.session.email_company}, (err,jobs) => {
-    if (err) {
-      console.log(err)
-    } else {
-      res.render("jobstatus", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company})
-    }
-  })
+  if (req.session.name_company) {
+    Jobs.find({company_email: req.session.email_company}, (err,jobs) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.render("jobstatus", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company})
+      }
+    })
+  } else {
+    res.redirect("/login/company");
+  }
 })
 
 http.get("/company/jobstatus/:id", (req,res) => {
   var id = req.params.id
-  Jobs.findOne({_id: id}, (err, jobs) => {
-    if (err) {
-      console.log(err)
+  if (req.session.name_company){
+    Jobs.findOne({_id: id}, (err, jobs) => {
+      if (err) {
+        console.log(err)
+      } else {
+        res.render("jobstatusdetail", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company})
+      }
+    })
+  }
+})
+
+http.post("/company/jobstatus/:id/:cand_email", (req,res) => {
+  var id = req.params.id;
+  var cand_email = req.params.cand_email;
+  Jobs.findOneAndUpdate({_id: id, "candidate": {$elemMatch: {email: cand_email }}},
+  {$set: {"candidate.$.status":req.body.decision}}, (err, result) => {
+    // TODO : make a message feature and disable button for decision
+    if(err) {
+      console.log(err);
     } else {
-      res.render("jobstatusdetail", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company})
+
+      if (req.body.decision === "Process to Interview") {
+        User.findOneAndUpdate({email: cand_email}, {$push: {notification: {sender: req.session.name_company,
+          message: "You are welcomed to proceed to Interview, please call " + req.session.phone_company + " for more information"}}}, (err, user) => {
+          if (err) {
+            console.log(err)
+          } else {
+            res.redirect("/company/jobstatus/"+id);
+          }
+
+        })
+      } else if (req.body.decision === "Reject") {
+        User.findOneAndUpdate({email: cand_email}, {$push: {notification: {sender: req.session.name_company,
+          message: "You are rejected because of unable to fulfill the requirements or else"}}}, (err, user) => {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log(user);
+            res.redirect("/company/jobstatus/"+id);
+          }
+
+        })
+      }
+
     }
   })
 })
@@ -325,7 +384,21 @@ http.get('/logout', (req,res) => {
   res.redirect('/')
 })
 
+http.get("/messages", (req,res) => {
+  // TODO : how to sort array by date (DONE)
+  User.find({email: req.session.email_user}, (err,user) => {
+    if(err) {
+      console.log(err)
+    } else {
+      res.render("messages", {name_user: req.session.name_user, email_user: req.session.email_user, userdata: user[0]})
+    }
+  })
+})
 
 http.listen(3000, () => {
   console.log("listening to 3000");
 })
+
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+}

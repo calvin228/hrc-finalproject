@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>HRC - Messages</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  </head>
+  <body>
+    <% include partials/header %>
+    <% include partials/nav %>
+    <% for ( i = userdata.notification.length-1; i > 0  ; i--) { %>
+      <div class="row border border-dark">
+        <div class="col-md-12">
+          <span><%= userdata.notification[i].message %></span>
+          <span><%= userdata.notification[i].sender %></span>
+        </div>
+      </div>
+    <% } %>
+  </body>
+</html>

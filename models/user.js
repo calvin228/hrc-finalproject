@@ -11,9 +11,11 @@ var userSchema = new Schema({
   dob: String,
   hire_allow: String,
   job_type: String,
+  phone_number: String,
   password: {
     type : String, required : true
   },
+  notification : [{sender: String, message: String, date: {type: Date, default:Date.now}}]
   // applied_job : String
 })
 
