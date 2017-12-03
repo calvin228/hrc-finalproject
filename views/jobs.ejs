@@ -5,6 +5,9 @@
     <title>HRC - Job Lists</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel='stylesheet' href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.js"
+			  integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
+			  crossorigin="anonymous"></script>
   </head>
   <body>
     <%- include partials/header %>
@@ -18,19 +21,24 @@
           </span>
         </div>
       </form>
-      <% for (i=0; i < jobdata.length; i++) { %>
-        <div class="row">
-          <h4><a href="/jobs/<%=jobdata[i]._id %>"><%= jobdata[i].title %></a></h4>
-          <p style="color:grey"><%= jobdata[i].company_name %></p>
-          <p>
-            <%= jobdata[i].location %>
-          </p>
-          <p>
-            <%= jobdata[i].description %>
-          </p>
-          <!-- <button type="submit" name="apply">Apply Now</button> -->
+
+      <div class="row">
+        <div class="col-md-10">
+          <% for (i=0; i < jobdata.length; i++) { %>
+            <div class="row">
+              <h4><a href="/jobs/<%=jobdata[i]._id %>"><%= jobdata[i].title %></a></h4>
+              <p style="color:grey"><%= jobdata[i].company_name %></p>
+              <p>
+                <%= jobdata[i].location %>
+              </p>
+              <p>
+                <%= jobdata[i].description %>
+              </p>
+              <!-- <button type="submit" name="apply">Apply Now</button> -->
+            </div>
+          <% } %>
         </div>
-      <% } %>
+      </div>
     </div>
   </body>
 

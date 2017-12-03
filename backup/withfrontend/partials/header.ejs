@@ -24,8 +24,11 @@
       </div>
       <button type="submit" class="btn btn-default">Login</button>
       <% } else { %>
-        <span>Hello </span><a href="/profile"><%= name_user %></a>
-        <a href="/logout">Logout</a>
+        <div class="form-group">
+          <span>Hello, <%= name_user %></span><br /><br />
+          <input class="form-control btn btn-success" type="button" formaction="/profile/<%= name_user %>" value="View My Profile"/>
+          <input class="form-control btn btn-danger" type="button" formaction="/logout" value="Log out"/>
+        </div>
       <% } %>
   </form>
   </body>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>HRC | HOME</title>
+	<title>HRC | ABOUT </title>
 
 	<!--/tags -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<meta name="keywords" content="Soft Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
+	<meta name="keywords" content="Soft Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
 Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
 	<script type="application/x-javascript">
 		addEventListener("load", function () {
@@ -31,7 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- header -->
 	<div class="header" id="home">
 		<div class="content white agile-info">
-			<nav class="navbar navbar-default" role="navigation">
+			<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -41,20 +41,21 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<span class="icon-bar"></span>
 				</button>
 						<a class="navbar-brand" href="index.html">
-							<img src="images/logo.png" width="120" height="50">
+							<img src="images/logo.png" width="100" height="45">
 						</a>
 					</div>
 					<!--/.navbar-header-->
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<nav class="link-effect-2" id="link-effect-2">
 							<ul class="nav navbar-nav">
-								<li class="active"><a href="index.html" class="effect-3">Home</a></li>
+								<!-- <li class="active"> -->
+								<li><a href="/" class="effect-3">Home</a></li>
 								<li class="dropdown">
 
 									<!-- INGAT KSH NAMA HTML KEMANA-->
 
 									<a href="opportunities.html" class="effect-3">Opportunities</a>
-									
+
 								</li>
 								<li class="dropdown">
 									<a href="academy.html" class="dropdown-toggle effect-3" data-toggle="dropdown">Academy<b class="caret"></b></a>
@@ -65,7 +66,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 												<!-- INGAT KSH NAMA HTML KEMANA-->
 
-													<li><a href=".html">Security 1</a></li>
+													<li><a href="academy.html">Security 1</a></li>
 													<li><a href=".html">Security 2</a></li>
 													<li><a href=".html">Security 3</a></li>
 												</ul>
@@ -73,7 +74,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 										</div>
 									</ul>
 								</li>
-								<li><a href="about.html" class="effect-3">About Us</a></li>
+								<li class="active"><a href="/about" class="effect-3">About Us</a></li>
 
 					<li>
 					<div class="dropdown" >
@@ -81,31 +82,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  						<div class="dropdown-content">
 
  						<h3>Sign In</h3>
- 					
+
  						<hr>
-  							<form>
-  									<div class="form-group">
-   										<label for="email">Email</label>
-  									    <input type="email" class="form-control input-sm" id="email">
-									</div>
-
-  									<div class="form-group">
-    									<label for="pwd">Password</label>
-  										<input type="password" class="form-control input-sm" id="pwd">
-  									</div>
-
- 									 <div>
-   										<p>New right here?</p>
-   										<a href="register.html"><p>Register here</p></a>
-   										<br>
-									</div>
- 									<button type="submit" class="btn btn-default">Login</button>
-							</form>
+  							<% include partials/header %>
 						</div>
 					</div>
-					
+
 					</li>
-								
+
 
 							</ul>
 						</nav>
@@ -119,71 +103,76 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 	</div>
 
+
 	<!-- banner -->
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
-			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<div class="item active">
-				<div class="container">
-					<div class="carousel-caption">
-						<div id="welcome">
-						<h1 id="big-title">   Welcome to <span id="comp-name">HR Companion</span></h1>
-						</div>
-						<br>
-						<br>
-						
-						<div class="agileits-button top_ban_agile">
-							<a class="btn btn-primary btn-lg" href="about.html">Know more »</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="item item2">
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>#Discover<span>Possibilities</span></h3>
-						<p>Learn. Get. Success.</p>
-						<div class="agileits-button top_ban_agile">
-							<a class="btn btn-primary btn-lg" href="single.html">Let's Go!</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="item item3">
-				<div class="container">
-					<div class="carousel-caption">
-						<h3>Certification <span>anytime, anywhere</span></h3>
-						<p>Say no to complicated certification</p>
-						<div class="agileits-button top_ban_agile">
-							<a class="btn btn-primary btn-lg" href="single.html">Book now! </a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			<span class="fa fa-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			<span class="fa fa-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-		<!-- The Modal -->
+	<div class="inner_page_agile">
+		<h3>About Us</h3>
+		<p>Add Some Short Description</p>
+
 	</div>
 	<!--//banner -->
+	<!--/w3_short-->
 
 
+	<div class="services-breadcrumb_w3layouts">
+		<div class="inner_breadcrumb">
+
+			<ul class="short_w3ls"_w3ls>
+				<li><a href="index.html">Home</a><span>|</span></li>
+				<li>About US</li>
+			</ul>
+		</div>
+	</div>
+	<div class="inner_content_info_agileits">
+		<div class="container">
+			<div class="tittle_head_w3ls">
+				<h3 class="tittle">Our Team</h3>
+			</div>
+			<div class="inner_sec_grids_info_w3ls">
+				<!-- <div class ="row"> -->
+				<div class="col-md-1 blog-grid one">
+					<a href="single.html"><img src="images/e6.jpg" alt="" ></a>
+					<div class="events_info">
+
+						<h4>Audian Taslim</h4>
+						<p>Project Manager</p>
+
+					</div>
+				</div>
+				<!-- </div> -->
+
+				<div class="col-md-1 blog-grid one">
+					<a href="single.html"><img src="images/e5.jpg" alt=""></a>
+					<div class="events_info">
+						<h4>Fendy Grata</h4>
+						<p>Analysis</p>
+					</div>
+				</div>
+				<div class="col-md-1 blog-grid one lost">
+					<a href="single.html"><img src="images/e4.jpg" alt=""></a>
+					<div class="events_info">
+						<h4>Anastasia Venessa Tanlim</h4>
+						<p>Front-End Programmer</p>
+						</div>
+				</div>
+				<div class="col-md-1 blog-grid">
+					<a href="single.html"><img src="images/e1.jpg" alt=""></a>
+					<div class="events_info">
+						<h4>Calvin Octa Wijaya</h4>
+						<p>Back-End Programmer</p>
+					</div>
+				</div>
+
+			<div class="clearfix"></div>
+
+			</div>
+
+		</div>
+	</div>
 
 <!-- footer -->
 	<div class="footer_top_agileits">
 		<div class="container">
-
 			<div class="col-md-4 footer_grid">
 				<h3>About Us</h3>
 				<p>Nam libero tempore cum vulputate id est id, pretium semper enim. Morbi viverra congue nisi vel pulvinar posuere sapien
@@ -219,27 +208,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</ul>
 			</div>
 			<div class="clearfix"> </div>
-		
+
 		</div>
 	</div>
 	<div class="footer_w3ls">
 		<div class="container">
-
 			<div class="footer_bottom">
 				<div class="col-md-9 footer_bottom_grid">
 					<div class="footer_bottom1">
 						<a class="navbar-brand" href="index.html">
 							<img src="images/logo2.png" width="100" height="45">
-						</a>
+						</a>s
 					</div>
 				</div>
 				<div class="col-md-3 footer_bottom_grid">
 					<h6>Follow Us</h6>
 					<div class="social">
 						<ul>
-							<li><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="www.rss.com"><i class="fa fa-rss"></i></a></li>
+							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li><a href="#"><i class="fa fa-rss"></i></a></li>
 						</ul>
 					</div>
 				</div>

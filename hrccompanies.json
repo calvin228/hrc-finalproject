@@ -1,2 +1,2 @@
-{"_id":{"$oid":"5a16e217e01be20bea758c7f"},"name":"PT.Maju Mundur Cantik","address":"Jalan Suka Suka No.144A","email":"majumundur@medan.co.id","password":"majumundur","__v":0}
-{"_id":{"$oid":"5a17c72fa47eb6185e68bc88"},"name":"PT. Ada aja","address":"Jalan Kawat","email":"adaaja@gmail.com","password":"nagaterbang","__v":0}
+{"_id":{"$oid":"5a1d56c69cc7551228291c22"},"name":"PT.Maju Mundur Cantik","address":"Jalan Mangga No.144A-B","email":"majumundur@mm.co.id","phone_number":"082361859473","password":"nagaterbang","__v":0}
+{"_id":{"$oid":"5a1e67a45c77870ca1a78c05"},"name":"PT.Maju Mundur Cantik","address":"Jalan Maju Mundur","email":"majumundur@medan.co.id","phone_number":"0109274921","password":"majumundur","__v":0}

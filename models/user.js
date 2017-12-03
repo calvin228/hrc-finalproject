@@ -8,15 +8,16 @@ var userSchema = new Schema({
     type : String, required : true, unique : true, lowercase : true
   },
   gender: String,
+  location: String,
   dob: String,
   hire_allow: String,
-  job_type: String,
   phone_number: String,
   password: {
     type : String, required : true
   },
-  notification : [{sender: String, message: String, date: {type: Date, default:Date.now}}]
-  // applied_job : String
+  notification : [{sender: String, message: String, date: {type: Date, default:Date.now}}],
+  image : String,
+  quickhire: String,
 })
 
 

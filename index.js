@@ -6,7 +6,9 @@ const http = express();
 const User = require('./models/user');
 const CompanyUser = require('./models/companyuser');
 const Jobs = require('./models/jobs');
+const Comments = require("./models/comments");
 const methodOverride = require("method-override");
+const QuickHire = require("./models/quickhire");
 // const bcrypt = require("bcrypt");
 // const passport = require('passport');
 // const LocalStrategy   = require('passport-local');
@@ -42,7 +44,7 @@ http.use(session({secret: 'iloveit'}));
 
 
 http.get('/', (req,res) => {
-  res.render('home', {name_user: req.session.name_user});
+  res.render('home', {name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user});
 })
 
 http.get('/login', (req,res) => {
@@ -55,15 +57,22 @@ http.get('/login/user', (req,res) => {
 })
 
 http.post("/login/user", (req,res) => {
-
   User.findOne({email: req.body.email, password: req.body.password, }, (err,user) => {
     if (err) {
       console.log(err);
     } else if (user){
       req.session.name_user = user.name;
       req.session.email_user = user.email;
-      res.redirect("/");
+      req.session.image_user = user.image;
+      if (req.session.returnPath) {
+        res.redirect(req.session.returnPath);
+      } else {
+        req.session.returnPath = "/";
+        res.redirect(req.session.returnPath);
+      }
+
     } else {
+      // TODO : CHANGE THIS ONE TO MESSAGE
       res.send('invalid');
     }
   })
@@ -85,6 +94,7 @@ http.post("/login/company", (req,res) => {
       req.session.name_company = user.name;
       req.session.email_company = user.email;
       req.session.phone_company = user.phone_number;
+      req.session.address_company = user.address;
       res.redirect("/company");
     } else {
       res.send('invalid');
@@ -101,22 +111,26 @@ http.get("/register/user" , (req,res) => {
 
 http.post('/register/user', (req,res) => {
 // Add more for other fields
-  if (req.body.name && req.body.email && req.body.gender && req.body.dob && req.body.phone && req.body.job_type && req.body.password) {
+  if (req.body.name && req.body.email && req.body.location && req.body.gender && req.body.dob && req.body.phone && req.body.image && req.body.quickhire && req.body.password) {
 
     var userData = {
       name: req.body.name,
       email: req.body.email,
       gender: req.body.gender,
       dob: req.body.dob,
+      location: req.body.location,
       phone_number: req.body.phone,
       hire_allow: "Yes",
-      job_type: req.body.job_type,
+      image: req.body.image,
+      quickhire: req.body.quickhire,
       password: req.body.password,
     }
     User.create({name: userData.name,
                  email: userData.email,gender: userData.gender,
-                 dob: userData.dob, hire_allow: userData.hire_allow, job_type: req.body.job_type,
-                 phone_number: userData.phone_number, password:userData.password}, (err,user) => {
+                 location: userData.location,
+                 dob: userData.dob, hire_allow: userData.hire_allow,
+                 phone_number: userData.phone_number, image: userData.image,
+                 quickhire: userData.quickhire, password:userData.password}, (err,user) => {
       if (err) {
         console.log(err)
         console.log("email existed, input another one")
@@ -124,6 +138,7 @@ http.post('/register/user', (req,res) => {
       } else {
         req.session.name_user = userData.name;
         req.session.email_user = userData.email;
+        req.session.image_user = userData.image;
         console.log("User registered")
         res.redirect("/");
       }
@@ -136,15 +151,18 @@ http.get('/register/company', (req,res) => {
 })
 
 http.post("/register/company", (req,res) => {
-  if(req.body.company_name && req.body.company_address && req.body.phone_number && req.body.email && req.body.password) {
+  if(req.body.company_name && req.body.company_address && req.body.image && req.body.account_name && req.body.account_number && req.body.phone_number && req.body.email && req.body.password) {
     var companyData = {
       name : req.body.company_name,
       address : req.body.company_address,
+      image : req.body.image,
+      account_name : req.body.account_name,
+      account_number : req.body.account_number,
       email : req.body.email,
       phone_number: req.body.phone_number,
       password : req.body.password
     }
-    CompanyUser.create({name: companyData.name, address: companyData.address,
+    CompanyUser.create({name: companyData.name, address: companyData.address, image: companyData.image, account_name: companyData.account_name, account_number: companyData.account_number,
     email: companyData.email, phone_number: companyData.phone_number, password: companyData.password}, (err,user) => {
       if (err){
         console.log(err)
@@ -153,6 +171,8 @@ http.post("/register/company", (req,res) => {
       } else if (user) {
         req.session.name_company = companyData.name;
         req.session.email_company = companyData.email;
+        req.session.image_company = companyData.image;
+        req.session.address_company = companyData.address;
         console.log("Company registered")
         res.redirect("/company");
       }
@@ -160,16 +180,20 @@ http.post("/register/company", (req,res) => {
   }
 })
 http.get("/profile", (req,res) => {
+  // Validate if user has login
   if (req.session.email_user === undefined) {
+    req.session.returnPath = req.path;
+    console.log(req.session.returnPath);
     res.redirect("/login");
   } else {
     User.find({email: req.session.email_user}, (err,user) => {
-      res.render("profile", {userdata: user[0], name_user: req.session.name_user});
+      res.render("profile", {userdata: user[0], name_user: req.session.name_user, image_user: req.session.image_user});
     })
   }
 
 })
 http.get("/profile/edit", (req,res) => {
+  // validate if user has login
   if (req.session.name_user) {
     User.findOne({email: req.session.email_user} , (err,user) => {
       if(err){
@@ -181,7 +205,6 @@ http.get("/profile/edit", (req,res) => {
           gender: user.gender,
           dob: user.dob,
           hire_allow: user.hire_allow,
-          job_type: user.job_type,
           phone_number: user.phone_number,
           password: user.password
         }
@@ -189,6 +212,8 @@ http.get("/profile/edit", (req,res) => {
       }
     })
   } else {
+    req.session.returnPath = req.path;
+    console.log(req.session.returnPath);
     res.redirect('/login/user')
   }
 
@@ -200,7 +225,6 @@ http.put("/profile/edit", (req,res) => {
     "dob": req.body.dob,
     "phone_number": req.body.phone,
     "hire_allow": req.body.hire_allow,
-    "job_type": req.body.job_type,
     "password": req.body.password
   }}, (err,user) => {
     if (err) {
@@ -214,6 +238,7 @@ http.put("/profile/edit", (req,res) => {
 http.get('/company/createjob', (req,res) => {
   if (req.session.name_company === undefined) {
     res.redirect("/login/company");
+
   } else {
     res.render("createjob", {name_company: req.session.name_company})
   }
@@ -221,7 +246,7 @@ http.get('/company/createjob', (req,res) => {
 
 http.post("/company/createjob", (req,res) => {
   if (req.body.job_title && req.body.salary && req.body.education &&
-      req.body.location && req.body.job_type && req.body.minage &&
+      req.body.location && req.body.minage &&
       req.body.maxage && req.body.skill && req.body.language && req.body.exp &&
       req.body.description){
         var jobData = {
@@ -229,7 +254,6 @@ http.post("/company/createjob", (req,res) => {
           salary : req.body.salary,
           location : req.body.location,
           company_email : req.session.email_company,
-          job_type : req.body.job_type,
           description : req.body.description,
           requirement : {
             minage : req.body.minage,
@@ -241,7 +265,7 @@ http.post("/company/createjob", (req,res) => {
           }
         }
         Jobs.create({title : jobData.job_title, salary: jobData.salary, location: jobData.location,
-        company_email: jobData.company_email, job_type: jobData.job_type, description : jobData.description,
+        company_email: jobData.company_email, description : jobData.description,
         requirement: {
           minAge : jobData.requirement.minage,
           maxage : jobData.requirement.maxage,
@@ -266,7 +290,7 @@ http.get('/jobs', (req,res) => {
         if (err){
           console.log(err)
         } else {
-          res.render("jobs", {jobdata: jobs, name_user: req.session.name_user})
+          res.render("jobs", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user})
         }
       })
 })
@@ -279,11 +303,14 @@ http.get("/jobs/:id", (req,res) => {
       if (err) {
         console.log(err)
       } else {
-        res.render("jobdetail", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user})
+        res.render("jobdetail", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user})
       }
     })
   } else {
+    req.session.returnPath = req.path;
+    console.log(req.session.returnPath);
     res.redirect("/login/user");
+
   }
 
 })
@@ -296,7 +323,7 @@ http.put("/jobs/:id", (req,res) => {
       console.log(err)
     } else {
       //TODO : Validate if user has login or not (DONE)
-      res.send("Job Applied ");
+      res.redirect("/jobs")
     }
   })
 
@@ -310,11 +337,41 @@ http.get("/search", (req,res) => {
       if (err){
         console.log(err)
       } else {
-        res.render("jobs", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user});
+        res.render("jobs", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user});
       }
     })
   }
 })
+
+http.get("/about", (req,res) => {
+  res.render("about", {name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user})
+})
+
+// http.get("/filter", (req,res) => {
+//   var filter = req.query.filter;
+//   var subfilter = req.query.subfilter;
+//   if (filter === "job_type"){
+//     Jobs.find({"job_type" : subfilter}, (err,jobs) => {
+//       if (err){
+//         console.log(err)
+//       } else {
+//         res.render("jobs", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user,
+//         image_user: req.session.image_user});
+//       }
+//     })
+//   } else {
+//     Jobs.find({filter: subfilter}, (err,jobs) => {
+//       if (err){
+//         console.log(err)
+//       } else {
+//         res.render("jobs", {jobdata: jobs, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user})
+//       }
+//     })
+//   }
+//
+//   // console.log(req.query.filter);
+//   // console.log(req.query.subfilter);
+// })
 http.get("/company/jobstatus", (req,res) => {
   if (req.session.name_company) {
     Jobs.find({company_email: req.session.email_company}, (err,jobs) => {
@@ -386,13 +443,88 @@ http.get('/logout', (req,res) => {
 
 http.get("/messages", (req,res) => {
   // TODO : how to sort array by date (DONE)
+  // TODO : show date and time message received
   User.find({email: req.session.email_user}, (err,user) => {
     if(err) {
       console.log(err)
     } else {
-      res.render("messages", {name_user: req.session.name_user, email_user: req.session.email_user, userdata: user[0]})
+      res.render("messages", {name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user, userdata: user[0]})
     }
   })
+})
+
+http.get("/academy", (req,res) => {
+  Comments.find({}, (err,comment) => {
+    if (err) {
+      console.log(err)
+    } else {
+      res.render("academy", {commentData: comment, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user});
+    }
+  })
+
+})
+
+http.post("/academy", (req,res) => {
+  if (req.body.comment && req.session.name_user){
+      Comments.create({comment: req.body.comment, person: {name: req.session.name_user, email: req.session.email_user, image: req.session.image_user}}, (err,comment) => {
+        if (err){
+          console.log(err)
+        } else {
+          res.redirect("/academy");
+        }
+      })
+  } else {
+    res.redirect("/login/user")
+  }
+})
+http.delete("/academy/:id", (req,res) => {
+  var id = req.params.id
+  Comments.findOneAndDelete({_id : id}, (err,comment) => {
+    if (err){
+      console.log(err)
+    } else {
+      res.redirect('/academy');
+    }
+  })
+})
+
+http.get('/company/quickhire', (req,res) => {
+  res.render("quickhire", {name_company: req.session.name_company, email_company: req.session.email_company});
+})
+
+http.get('/api/company/quickhire', (req,res) => {
+  User.find({location: req.query.location, quickhire: req.query.job_title}, (err,user) => {
+    if(err){
+      console.log(err)
+    } else {
+      res.send(user);
+    }
+  })
+})
+
+http.post("/company/quickhire/hire/:id", (req,res) => {
+  var id = req.params.id;
+  User.findOneAndUpdate({_id: id}, {$push: {notification: {sender: req.session.name_company,
+    message: "You have been hired by "+req.session.name_company+" please click button 'View Info' below"}}}, (err, user)=>{
+      if (err){
+        console.log(err)
+      } else {
+        User.findOneAndUpdate({_id: id}, {$set: {hire_allow: "No"}}, (err,user) => {
+          if (err){
+            console.log(err)
+          } else {
+            QuickHire.create({job_title: req.body.job_title, salary:req.body.salary, location:req.body.location, candidate_id: id, company_name: req.session.name_company, company_address: req.session.address_company, work_date: req.body.date}, (err,result) => {
+              if (err){
+                console.log(err)
+              } else {
+                res.redirect('/company/quickhire');
+              }
+            })
+          }
+        })
+      }
+    })
+
 })
 
 http.listen(3000, () => {

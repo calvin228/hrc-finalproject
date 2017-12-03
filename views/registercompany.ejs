@@ -7,15 +7,28 @@
   <body>
     <form method="post" action='/register/company'>
       <label>Company Name : </label>
-      <input type="text" name='company_name' />
+      <input type="text" name='company_name' required/>
       <label>Company Address : </label>
-      <textarea name="company_address"></textarea>
+      <textarea name="company_address" required></textarea>
+      <!-- TODO : Add this to model -->
+      <label>Company Territorial : </label>
+      <select name="territorial" required>
+        <option value="Medan">Medan</option>
+        <option value="Binjai">Binjai</option>
+        <option value="Belawan">Belawan</option>
+      </select>
+      <label>Bank Account Name : </label>
+      <input type="text" name="account_name" required/>
+      <label>Bank Account Number : </label>
+      <input type="text" name="account_number" required/>
+      <label>Image (URL):</label>
+      <input type="text" name="image" required/>
       <label>Email Address : </label>
-      <input type="email" name="email" />
+      <input type="email" name="email" required/>
       <label>Phone Number : </label>
-      <input type="tel" name="phone_number" />
+      <input type="tel" name="phone_number" required/>
       <label>Password : </label>
-      <input type="password" name="password" />
+      <input type="password" name="password" required/>
       <input type="submit" value="submit" />
     </form>
   </body>

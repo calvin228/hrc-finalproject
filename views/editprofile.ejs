@@ -7,14 +7,15 @@
   <body>
     <% include partials/header %>
     <form method="post" action="/profile/edit?_method=PUT">
-      <span>Name : <%= userData.name %></span><br />
+      <label>Name :</label>
+      <input type="text" name="name" value="<%= userData.name%>" readonly/><br />
       <label>Email</label><br />
-      <input type='email' name="email" value="<%= userData.email %>"/><br />
+      <input type='email' name="email" value="<%= userData.email %>" readonly/><br />
       <span>Gender : <%= userData.gender %></span><br />
       <label>Date Of Birth</label><br />
       <input type="date" name="dob" value="<%= userData.dob %>"/><br />
       <label>Phone Number</label><br />
-      <input type="tel" name="phone" value="<%= userData.phone_number"/><br />
+      <input type="tel" name="phone" value="<%= userData.phone_number %>"/><br />
       <label>Hire Allowance : </label>
       <% if (userData.hire_allow === "Yes") { %>
         <input type="radio" name="hire_allow" value="Yes" checked>Yes
@@ -23,14 +24,34 @@
         <input type="radio" name="hire_allow" value="Yes">Yes
         <input type="radio" name="hire_allow" value="No" checked>No<br  />
       <% } %>
-      <label>Job Type :</label>
-      <% if (userData.job_type === "Full-time") { %>
-        <input type="radio" name="job_type" value="Full-time" checked/>Full-time<br />
-        <input type="radio" name="job_type" value="Part-time" />Part-time<br />
-      <% } else if (userData.job_type === "Part-time") {%>
-        <input type="radio" name="job_type" value="Full-time" />Full-time<br />
-        <input type="radio" name="job_type" value="Part-time" checked/>Part-time<br />
+      <label>Current Location : </label><br />
+      <select name="location" >
+      <% if ( userData.location === "Medan") { %>
+        <option value="Medan" selected>
+          Medan
+        </option>
+        <option value="Binjai">Binjai</option>
+        <option value="Belawan">
+          Belawan
+        </option>
+      <% } else if (userData.location === "Binjai") { %>
+        <option value="Medan">
+          Medan
+        </option>
+        <option value="Binjai" selected>Binjai</option>
+        <option value="Belawan">
+          Belawan
+        </option>
+      <% } else if (userData.locaton === "Belawan") { %>
+        <option value="Medan">
+          Medan
+        </option>
+        <option value="Binjai">Binjai</option>
+        <option value="Belawan" selected>
+          Belawan
+        </option>
       <% } %>
+      </select>
       <label>Passsword</label><br /><!-- Don't use this whenever password is encrypted -->
       <input type="password" name='password' value="<%= userData.password %>"/><br />
       <input type="submit" name="update" value="Update"/>

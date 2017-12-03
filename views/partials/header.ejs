@@ -10,7 +10,9 @@
         <a href="/login">Login</a>
         <a href="/register">Sign Up</a>
       <% } else { %>
+        <img class="img-responsive img-circle" width="33" height="33" src="<%= image_user %>" />
         <span>Hello </span><a href="/profile"><%= name_user %></a>
+        <br />  
         <a href="/messages">Messages</a>
         <a href="/logout">Logout</a>
       <% } %>

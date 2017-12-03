@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Quick Hire</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script
+    			  src="https://code.jquery.com/jquery-3.2.1.js"
+    			  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    			  crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <%- include partials/headercompany %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="nav navbar-nav navbar-right">
+          <li class="active">
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="/company/createjob">Create Jobs</a>
+          </li>
+          <li>
+            <a href="/company/quickhire">Quick Hire</a>
+          </li>
+          <li>
+            <a href="/company/jobstatus">Job status</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="form-group">
+        <label>Job Title</label><br />
+        <select name="job_title" id="job_title" required>
+          <option value="Satpam">Satpam</option>
+          <option value="Bodyguard">Bodyguard</option>
+        </select><br />
+        <label>Date of Work</label><br />
+        <input type="date" name="date" required/><br />
+        <label>Salary per Day</label>
+        <input type="number" name="salary" required /><br />
+        <label>Location of Work</label><br />
+        <select name="location" id="location" required>
+          <option value="Medan">
+            Medan
+          </option>
+          <option value="Binjai">Binjai</option>
+          <option value="Belawan">
+            Belawan
+          </option>
+        </select><br />
+        <button id="find" class="form-control" type="submit" value="find">Find</button>
+      </div>
+      <div class="findResult">
+      </div>
+    </div>
+  </body>
+  <script>
+  $(function(){
+    $('#find').on('click', function(){
+      var location = $("#location").val();
+      var job_title = $("#job_title").val();
+      $.ajax({
+        url:"/api/company/quickhire?location="+location+"&job_title="+job_title,
+        type: "GET",
+        dataType: "json",
+        success: function(data){
+          $(data).each(function(index,value){
+              $(".findResult").append("<div class='row'><form method='POST' action='/company/quickhire/hire/"+data[index]._id+"'><div class='col-xs-1'><img src='"+data[index].image+"' class='img-responsive img-circle' width=33 height=33></div><div class='col-xs-11'><span>"+data[index].name+"</span><br /><span>"+data[index].location+"</span></div><button type='submit' value='Hire'>Hire</button></form></div>")
+          })
+        },
+        error: function(){
+          alert("Error getting data")
+        }
+      })
+    })
+  })
+  </script>
+</html>

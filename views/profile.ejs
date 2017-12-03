@@ -8,12 +8,12 @@
   </head>
   <body>
     <% include partials/header %>
+    <img src="<%= userdata.image %>" class="img-circle img-responsive"/>
     <span>Full Name : <%= userdata.name %></span>
     <span>Email : <%= userdata.email %></span><br />
     <span>Gender : <%= userdata.gender %></span><br />
     <span>Date Of Birth : <%= userdata.dob %></span><br />
     <span>Hire Allowance : <%= userdata.hire_allow %></span>
-    <span>Job type : <%= userdata.job_type %></span>
     <a href="/profile/edit">Update your profile here</a>
 
   </body>
