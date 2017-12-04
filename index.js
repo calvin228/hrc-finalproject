@@ -533,12 +533,14 @@ http.get('/api/company/quickhire', (req,res) => {
   })
 })
 
-http.post("/company/quickhire/hire/:id", (req,res) => {
-  var id = req.params.id;
+http.post("/company/quickhire", (req,res) => {
+  var id = req.query.id;
+  var job_title = req.query.job_title;
+  var date = req.query.date;
+  var salary = req.query.salary;
+  console.log(date);
   User.findOneAndUpdate({_id: id}, {$push: {notification: {sender: req.session.name_company,
-    message: "You have been hired by "+req.session.name_company+" as a '"+req.body.job_title+"' on "+req.body.date+" with payment of "+req.body.salary+"/day. Please contact "+req.session.phone_company+" for confirmation", detailed: {
-      job_type: req.body.job_type, work_time: req.body.date, salary: req.body.salary, location: req.body.location}
-    }}}, (err, user)=>{
+    message: "You have been hired by "+req.session.name_company+" as a '"+job_title+"' on "+date+" with payment of "+salary+"/day. Please contact "+req.session.phone_company+" for confirmation"}}}, (err, user)=>{
       if (err){
         console.log(err)
       } else {

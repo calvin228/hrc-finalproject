@@ -15,7 +15,7 @@
       <div class="container-fluid">
         <div class="nav navbar-nav navbar-right">
           <li class="active">
-            <a href="#">Home</a>
+            <a href="/company">Home</a>
           </li>
           <li>
             <a href="/company/createjob">Create Jobs</a>
@@ -40,9 +40,9 @@
           <option value="Bodyguard">Bodyguard</option>
         </select><br />
         <label>Date of Work</label><br />
-        <input type="date" name="date" required/><br />
+        <input type="date" id="date" name="date" required/><br />
         <label>Salary per Day</label>
-        <input type="number" name="salary" required /><br />
+        <input type="number" id="salary" name="salary" required /><br />
         <label>Location of Work</label><br />
         <select name="location" id="location" required>
           <option value="Medan">
@@ -53,7 +53,7 @@
             Belawan
           </option>
         </select><br />
-        <button id="find" class="form-control" type="submit" value="find">Find</button>
+        <button id="find" class="form-control" type="button" value="find">Find</button>
       </div>
       <div class="findResult">
       </div>
@@ -64,6 +64,8 @@
     $('#find').on('click', function(){
       var location = $("#location").val();
       var job_title = $("#job_title").val();
+      var salary = $('#salary').val();
+      var date = $('#date').val()
       $.ajax({
         url:"/api/company/quickhire?location="+location+"&job_title="+job_title,
         type: "GET",
@@ -72,7 +74,7 @@
           $(data).each(function(index,value){
             if (data[index].hire_allow === "Yes"){
               $(".findResult").children().remove()
-              $(".findResult").append("<div class='row'><form method='POST' action='/company/quickhire/hire/"+data[index]._id+"'><div class='col-xs-1'><img src='"+data[index].image+"' class='img-responsive img-circle' width=33 height=33></div><div class='col-xs-11'><span>"+data[index].name+"</span><br /><span>"+data[index].location+"</span></div><button type='submit' value='Hire'>Hire</button></form></div>")
+              $(".findResult").append("<div class='row'><form method='POST' action='/company/quickhire/?id="+data[index]._id+"&location="+location+"&job_title="+job_title+"&date="+date+"&salary="+salary+"'><div class='col-xs-1'><img src='"+data[index].image+"' class='img-responsive img-circle' width=33 height=33></div><div class='col-xs-11'><span>"+data[index].name+"</span><br /><span>"+data[index].location+"</span></div><button type='submit' value='Hire'>Hire</button></form></div>")
             } else {
               $(".findResult").children().remove()
               $(".findResult").append("<div class='row'><div class='text-center'>No result</div></div>")
