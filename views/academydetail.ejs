@@ -83,24 +83,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  						<h3>Sign In</h3>
 
  						<hr>
-  							<form>
-  									<div class="form-group">
-   										<label for="email">Email</label>
-  									    <input type="email" class="form-control input-sm" id="email">
-									</div>
-
-  									<div class="form-group">
-    									<label for="pwd">Password</label>
-  										<input type="password" class="form-control input-sm" id="pwd">
-  									</div>
-
- 									 <div>
-   										<p>New right here?</p>
-   										<a href="register.html"><p>Register here</p></a>
-   										<br>
-									</div>
- 									<button type="submit" class="btn btn-default">Login</button>
-							</form>
+  							<%- include partials/header %>
 						</div>
 					</div>
 
@@ -230,13 +213,12 @@ Selain lembaga pendidikan kepolisian negara seperti Sekolah Polisi Negara, hanya
 							</div>
 							<div class="w3layouts_mail_grid single">
 								<h3 class="single">Leave a Comment</h3>
-								<form action="/academy/detail/1" method="post">
+								<form method="post" action="/academy/detail/1" >
 									<div class="col-md-12 wthree_contact_left_grid">
 										<textarea name="comment" placeholder="Message..." required=""></textarea>
 										<input type="submit" value="Submit">
 									</div>
 									<div class="clearfix"> </div>
-
 								</form>
 							</div>
 						</div>

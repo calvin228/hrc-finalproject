@@ -478,8 +478,9 @@ http.get("/academy/detail/:id" , (req,res) => {
 })
 
 http.post("/academy/detail/:id", (req,res) => {
+  var id = req.params.id;
   if (req.body.comment && req.session.name_user){
-      Comments.create({article_id: req.params.id, comment: req.body.comment, person: {name: req.session.name_user, email: req.session.email_user, image: req.session.image_user}}, (err,comment) => {
+      Comments.create({article_id: id, comment: req.body.comment, person: {name: req.session.name_user, email: req.session.email_user, image: req.session.image_user}}, (err,comment) => {
         if (err){
           console.log(err)
         } else {
@@ -487,9 +488,10 @@ http.post("/academy/detail/:id", (req,res) => {
         }
       })
   } else {
-    res.redirect("/login/user")
+    res.redirect("/login/user");
   }
 })
+
 http.delete("/academy/details/:article_id/:id", (req,res) => {
   var article_id = req.params.article_id;
   var id = req.params.id
