@@ -111,7 +111,7 @@ http.get("/register/user" , (req,res) => {
 
 http.post('/register/user', (req,res) => {
 // Add more for other fields
-  if (req.body.name && req.body.email && req.body.location && req.body.gender && req.body.dob && req.body.phone && req.body.image && req.body.quickhire && req.body.password) {
+  if (req.body.name && req.body.email && req.body.location && req.body.gender && req.body.dob && req.body.phone && req.body.image && req.body.quickhire && req.body.address && req.body.password) {
 
     var userData = {
       name: req.body.name,
@@ -122,6 +122,7 @@ http.post('/register/user', (req,res) => {
       phone_number: req.body.phone,
       hire_allow: "Yes",
       image: req.body.image,
+      address: req.body.address,
       quickhire: req.body.quickhire,
       password: req.body.password,
     }
@@ -130,7 +131,7 @@ http.post('/register/user', (req,res) => {
                  location: userData.location,
                  dob: userData.dob, hire_allow: userData.hire_allow,
                  phone_number: userData.phone_number, image: userData.image,
-                 quickhire: userData.quickhire, password:userData.password}, (err,user) => {
+                 quickhire: userData.quickhire, address: userData.address, password:userData.password}, (err,user) => {
       if (err) {
         console.log(err)
         console.log("email existed, input another one")
@@ -140,7 +141,14 @@ http.post('/register/user', (req,res) => {
         req.session.email_user = userData.email;
         req.session.image_user = userData.image;
         console.log("User registered")
-        res.redirect("/");
+        User.findOneAndUpdate({email: req.session.email_user}, {$push: {notification: {sender: "HRC Bot",
+          message: "Thank you for register to HRC , and welcome to HRC. Good luck on finding your new job"}}}, (err, user) => {
+              if (err){
+                console.log(err)
+              } else {
+                res.redirect("/");
+              }
+          })
       }
     })
   }
@@ -507,7 +515,12 @@ http.delete("/academy/details/:article_id/:id", (req,res) => {
 
 
 http.get('/company/quickhire', (req,res) => {
-  res.render("quickhire", {name_company: req.session.name_company, email_company: req.session.email_company});
+  if( req.session.name_company) {
+    res.render("quickhire", {name_company: req.session.name_company, email_company: req.session.email_company});
+  } else {
+    res.redirect("/login/company");
+  }
+
 })
 
 http.get('/api/company/quickhire', (req,res) => {
@@ -523,7 +536,9 @@ http.get('/api/company/quickhire', (req,res) => {
 http.post("/company/quickhire/hire/:id", (req,res) => {
   var id = req.params.id;
   User.findOneAndUpdate({_id: id}, {$push: {notification: {sender: req.session.name_company,
-    message: "You have been hired by "+req.session.name_company+" please click button 'View Info' below"}}}, (err, user)=>{
+    message: "You have been hired by "+req.session.name_company+" as a '"+req.body.job_title+"' on "+req.body.date+" with payment of "+req.body.salary+"/day. Please contact "+req.session.phone_company+" for confirmation", detailed: {
+      job_type: req.body.job_type, work_time: req.body.date, salary: req.body.salary, location: req.body.location}
+    }}}, (err, user)=>{
       if (err){
         console.log(err)
       } else {

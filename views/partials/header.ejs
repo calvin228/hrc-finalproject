@@ -26,8 +26,8 @@
       <% } else { %>
         <div class="form-group">
           <span>Hello, <%= name_user %></span><br /><br />
-          <input class="form-control btn btn-success" type="button" formaction="/profile/<%= name_user %>" value="View My Profile"/>
-          <input class="form-control btn btn-danger" type="button" formaction="/logout" value="Log out"/>
+          <a href="/profile"><button class="form-control btn btn-success" type="submit" value="View My Profile"/>View My Profile</button></a>
+          <a href="/logout"><button class="form-control btn btn-danger" type="submit" value="Log out"/>Log Out</button></a>
         </div>
       <% } %>
   </form>

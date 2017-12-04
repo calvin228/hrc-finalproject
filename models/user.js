@@ -17,6 +17,7 @@ var userSchema = new Schema({
   },
   notification : [{sender: String, message: String, date: {type: Date, default:Date.now}}],
   image : String,
+  address : String,
   quickhire: String,
 })
 

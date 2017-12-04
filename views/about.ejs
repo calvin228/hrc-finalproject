@@ -78,7 +78,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 					<li>
 					<div class="dropdown" >
-						<img  src="images/profile-icon.png" width="33" height="33" >
+						<% if (image_user === undefined) { %>
+							<img  src="images/profile-icon.png" width="33" height="33" >
+						<% } else { %>
+							<img src="<%= image_user %>" width="33" height="33">
+						 <% } %>
  						<div class="dropdown-content">
 
  						<h3>Sign In</h3>

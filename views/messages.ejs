@@ -4,6 +4,10 @@
     <meta charset="utf-8">
     <title>HRC - Messages</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.js"
+            integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+            crossorigin="anonymous"></script>
   </head>
   <body>
     <% include partials/header %>
@@ -14,9 +18,10 @@
         <%  if (userdata.notification[i].message.includes("View Info")) { %>
           <span><%= userdata.notification[i].message %></span>
           <span><%= userdata.notification[i].sender %></span>
-        <% } %>
+        <% } else {%>
           <span><%= userdata.notification[i].message %></span>
           <span><%= userdata.notification[i].sender %></span>
+        <% } %>
         </div>
       </div>
     <% } %>
