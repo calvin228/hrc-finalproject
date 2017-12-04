@@ -453,33 +453,47 @@ http.get("/messages", (req,res) => {
   })
 })
 
+
 http.get("/academy", (req,res) => {
+  res.render('academy', {name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user})
+  // Comments.find({}, (err,comment) => {
+  //   if (err) {
+  //     console.log(err)
+  //   } else {
+  //     res.render("academy", {commentData: comment, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user});
+  //   }
+  // })
+
+})
+
+http.get("/academy/detail/:id" , (req,res) => {
+  var id = req.params.article_id;
   Comments.find({}, (err,comment) => {
     if (err) {
       console.log(err)
     } else {
-      res.render("academy", {commentData: comment, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user});
+      res.render("academydetail", {commentData: comment, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user});
     }
   })
-
 })
 
-http.post("/academy", (req,res) => {
+http.post("/academy/detail/:id", (req,res) => {
   if (req.body.comment && req.session.name_user){
-      Comments.create({comment: req.body.comment, person: {name: req.session.name_user, email: req.session.email_user, image: req.session.image_user}}, (err,comment) => {
+      Comments.create({article_id: req.params.id, comment: req.body.comment, person: {name: req.session.name_user, email: req.session.email_user, image: req.session.image_user}}, (err,comment) => {
         if (err){
           console.log(err)
         } else {
-          res.redirect("/academy");
+          res.redirect("/academy/detail/"+id);
         }
       })
   } else {
     res.redirect("/login/user")
   }
 })
-http.delete("/academy/:id", (req,res) => {
+http.delete("/academy/details/:article_id/:id", (req,res) => {
+  var article_id = req.params.article_id;
   var id = req.params.id
-  Comments.findOneAndDelete({_id : id}, (err,comment) => {
+  Comments.findOneAndDelete({_id : id, article_id: article_id}, (err,comment) => {
     if (err){
       console.log(err)
     } else {
@@ -487,6 +501,8 @@ http.delete("/academy/:id", (req,res) => {
     }
   })
 })
+
+
 
 http.get('/company/quickhire', (req,res) => {
   res.render("quickhire", {name_company: req.session.name_company, email_company: req.session.email_company});
