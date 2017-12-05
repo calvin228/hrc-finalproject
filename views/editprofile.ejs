@@ -16,6 +16,8 @@
       <input type="date" name="dob" value="<%= userData.dob %>"/><br />
       <label>Phone Number</label><br />
       <input type="tel" name="phone" value="<%= userData.phone_number %>"/><br />
+      <label>Image (URL)</label>
+      <input type="image" name="image" value="<%= userData.image %>" /><br />
       <label>Hire Allowance : </label>
       <% if (userData.hire_allow === "Yes") { %>
         <input type="radio" name="hire_allow" value="Yes" checked>Yes

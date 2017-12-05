@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Edit Company Profile</title>
+  </head>
+  <body>
+    <%- include partials/headercompany %>
+    <form method="post" action="/company/profile/edit?_method=PUT">
+      <label>Company Name :</label>
+      <input type="text" name="name" value="<%= companyData.name%>" readonly/><br />
+      <label>Company Email</label><br />
+      <input type='email' name="email" value="<%= companyData.email %>" readonly/><br />
+      <label>Company Phone Number</label><br />
+      <input type="tel" name="phone" value="<%= companyData.phone_number %>"/><br />
+      <label>Company Address : </label>
+      <textarea name="address"><%= companyData.address %></textarea>
+      <label>Company Image (URL)</label>
+      <input type="text" name="image" value="<%= companyData.image %>" /><br />
+      <label>Company Account Name : </label>
+      <input type="text" name="account_name" value="<%= companyData.account_name %>" /><br />
+      <label>Company Account Number : </label>
+      <input type="text" name="account_number" value="<%= companyData.account_number %>" /><br />
+      <label>Password : </label>
+      <input type="password" name="password" value="<%= companyData.password %>"><br />
+      <input type="submit" value="Update" />
+    </form>
+  </body>
+</html>

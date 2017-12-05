@@ -14,7 +14,9 @@ const QuickHire = require("./models/quickhire");
 // const LocalStrategy   = require('passport-local');
 // const passportLocalMongoose = require('passport-local-mongoose');
 
-mongoose.connect("mongodb://calvin228:calvin123@ds117849.mlab.com:17849/hrc");
+// var url = "mongodb://calvin228:calvin123@ds117849.mlab.com:17849/hrc"
+// mongoose.connect(url,{useMongoClient: true});
+mongoose.connect("mongodb://localhost:27017/hrc");
 mongoose.connection.once('open', () => {
   console.log('Connection to database success');
 }).on('error', (err) => {
@@ -212,6 +214,7 @@ http.get("/profile/edit", (req,res) => {
           email: user.email,
           gender: user.gender,
           dob: user.dob,
+          image: user.image,
           hire_allow: user.hire_allow,
           phone_number: user.phone_number,
           password: user.password
@@ -475,12 +478,12 @@ http.get("/academy", (req,res) => {
 })
 
 http.get("/academy/detail/:id" , (req,res) => {
-  var id = req.params.article_id;
+  var id = req.params.id;
   Comments.find({}, (err,comment) => {
     if (err) {
       console.log(err)
     } else {
-      res.render("academydetail", {commentData: comment, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user});
+      res.render("academydetail"+id, {commentData: comment, name_user: req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user});
     }
   })
 })
@@ -562,6 +565,62 @@ http.post("/company/quickhire", (req,res) => {
 
 })
 
+
+http.get("/company/profile", (req,res)=> {
+  if(req.session.email_company === undefined){
+    res.redirect("/login/company")
+  } else {
+    CompanyUser.findOne({email:req.session.email_company}, (err,company) => {
+      if (err){
+        console.log(err)
+      } else {
+        res.render("profilecompany", {name_company: req.session.name_company, email_company: req.session.email_company, companyData: company})
+      }
+    })
+  }
+
+})
+
+http.get("/company/profile/edit", (req,res) => {
+  if (req.session.email_company) {
+    CompanyUser.findOne({email: req.session.email_company},(err,company) => {
+      if (err) {
+        console.log(err)
+      } else {
+        var companyData = {
+          name: company.name,
+          email: company.email,
+          image: company.image,
+          address : company.address,
+          phone_number: company.phone_number,
+          account_number: company.account_number,
+          account_name: company.account_name,
+          password: company.password
+        }
+        res.render("editprofilecompany", {name_company: req.session.name_company, email_company: req.session.email_company, companyData: companyData})
+      }
+    })
+  } else {
+    res.redirect('/login/company')
+  }
+
+})
+http.put('/company/profile/edit', (req,res) => {
+  CompanyUser.findOneAndUpdate({email: req.session.email_company}, { "$set": {
+    "phone_number": req.body.phone,
+    "image" :req.body.image,
+    "address" : req.body.address,
+    "account_name" : req.body.account_name,
+    "account_number" : req.body.account_number,
+    "password": req.body.password
+  }}, (err,company) => {
+    if (err){
+      console.log(err)
+    } else {
+      res.redirect("/company/profile")
+    }
+  })
+})
 http.listen(3000, () => {
   console.log("listening to 3000");
 })
