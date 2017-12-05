@@ -507,7 +507,7 @@ http.post("/academy/detail/:id", (req,res) => {
 http.delete("/academy/details/:article_id/:id", (req,res) => {
   var article_id = req.params.article_id;
   var id = req.params.id
-  Comments.findOneAndDelete({_id : id, article_id: article_id}, (err,comment) => {
+  Comments.findOneAndRemove({_id : id, article_id: article_id}, (err,comment) => {
     if (err){
       console.log(err)
     } else {
@@ -602,7 +602,9 @@ http.get("/company/profile/edit", (req,res) => {
       }
     })
   } else {
+    req.session.returnPath = req.path;
     res.redirect('/login/company')
+
   }
 
 })
