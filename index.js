@@ -20,6 +20,7 @@ mongoose.connect(url,{useMongoClient: true});
 mongoose.connection.once('open', () => {
   console.log('Connection to database success');
 }).on('error', (err) => {
+  console.log(err);
   console.log('Connection error');
 })
 
@@ -75,7 +76,7 @@ http.post("/login/user", (req,res) => {
 
     } else {
       // TODO : CHANGE THIS ONE TO MESSAGE
-      res.send('invalid');
+      res.send('invalid login <br><a href="/">back</a>');
     }
   })
 });
@@ -621,8 +622,8 @@ http.put('/company/profile/edit', (req,res) => {
     }
   })
 })
-http.listen(3000, () => {
-  console.log("listening to 3000");
+http.listen(process.env.PORT || 3000, () => {
+  console.log("Started");
 })
 
 function escapeRegex(text) {
