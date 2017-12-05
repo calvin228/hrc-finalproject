@@ -14,9 +14,9 @@ const QuickHire = require("./models/quickhire");
 // const LocalStrategy   = require('passport-local');
 // const passportLocalMongoose = require('passport-local-mongoose');
 
-// var url = "mongodb://calvin228:calvin123@ds117849.mlab.com:17849/hrc"
-// mongoose.connect(url,{useMongoClient: true});
-mongoose.connect("mongodb://localhost:27017/hrc");
+var url = "mongodb://calvin228:calvin123@ds117849.mlab.com:17849/hrc"
+mongoose.connect(url,{useMongoClient: true});
+// mongoose.connect("mongodb://localhost:27017/hrc");
 mongoose.connection.once('open', () => {
   console.log('Connection to database success');
 }).on('error', (err) => {
