@@ -2,34 +2,189 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>HRC - Register Company</title>
+    <title>HRC - Registration</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style>
+  #success_message{ display: none;}
+  </style>
+
+  
+
   </head>
   <body>
-    <form method="post" action='/register/company'>
-      <label>Company Name : </label>
-      <input type="text" name='company_name' required/>
-      <label>Company Address : </label>
-      <textarea name="company_address" required></textarea>
-      <!-- TODO : Add this to model -->
-      <label>Company Territorial : </label>
-      <select name="territorial" required>
+         
+    <br>
+    <br>
+
+<div class="container">
+
+    <form class="well form-horizontal" action="/register/company" method="post"   >
+<fieldset>
+
+<!-- Form Name -->
+<legend>Company Registration</legend>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Company Name</label>  
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  type="text" name="company_name" placeholder="Company Name" class="form-control"  required>
+    </div>
+  </div>
+</div>
+
+
+<!-- ADDRESS -->
+
+                    <div class="form-group">
+  <label class="col-md-4 control-label">Company Address</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input name="company_address" placeholder="Company Address" class="form-control" type="address">
+    </div>
+  </div>
+</div>  
+
+<!-- COMPANY TERRITORIAL -->
+<div class="form-group">
+        <label class="col-md-4 control-label">Company Territorial</label>
+        <div class="col-md-4 selectContainer">
+          
+            <select name="territorial" required>
         <option value="Medan">Medan</option>
-        <option value="Binjai">Binjai</option>
-        <option value="Belawan">Belawan</option>
+        <option value="Binjai">
+          Binjai
+        </option>
+        <option value="Belawan">
+          Belawan
+        </option>
       </select>
-      <label>Bank Account Name : </label>
-      <input type="text" name="account_name" required/>
-      <label>Bank Account Number : </label>
-      <input type="text" name="account_number" required/>
-      <label>Image (URL):</label>
-      <input type="text" name="image" required/>
-      <label>Email Address : </label>
-      <input type="email" name="email" required/>
-      <label>Phone Number : </label>
-      <input type="tel" name="phone_number" required/>
-      <label>Password : </label>
-      <input type="password" name="password" required/>
-      <input type="submit" value="submit" />
-    </form>
+
+        </div>
+    </div>  
+  
+<!-- Text input-->
+       <div class="form-group">
+  <label class="col-md-4 control-label">Bank Acc Name</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+  <input name="account_name" placeholder="Bank Acc Name" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+
+<!-- Text input-->
+       <div class="form-group">
+  <label class="col-md-4 control-label">Bank Acc Number</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-briefcase"></i></span>
+  <input name="account_number" placeholder="Bank Acc Number" class="form-control"  type="text">
+    </div>
+  </div>
+</div>
+
+
+<!-- IMAGE URL input-->
+       
+<div class="form-group">
+  <label class="col-md-4 control-label">Image URL</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+  <input name="image" placeholder="Image URL" class="form-control" type="text" required>
+    </div>
+  </div>
+</div>
+
+
+  <!-- Text input-->
+       <div class="form-group">
+  <label class="col-md-4 control-label">E-Mail Address</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" placeholder="E-Mail Address" class="form-control"  type="email">
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Text input-->
+       
+<div class="form-group">
+  <label class="col-md-4 control-label">Phone Number</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+  <input name="phone_number" placeholder="Phone Number" class="form-control" type="tel" required>
+    </div>
+  </div>
+</div>
+
+
+
+
+      
+
+
+<!-- Text input-->
+ 
+<div class="form-group">
+  <label class="col-md-4 control-label">Password</label>  
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+  <input name="password" placeholder="Password" class="form-control"  type="password">
+    </div>
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+
+    <button type="submit" class="btn btn-success" name="register" value="submit" required>Register <span class="glyphicon glyphicon-send"></span></button>
+     <a href="/company" class="btn btn-danger">Cancel </a>
+
+  </div>
+</div>
+
+
+</fieldset>
+</form>
+
+
+
+</div>
+    </div><!-- /.container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </body>
 </html>

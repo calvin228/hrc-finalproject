@@ -214,13 +214,14 @@ http.get("/profile/edit", (req,res) => {
           name: user.name,
           email: user.email,
           gender: user.gender,
+          location: user.location,
           dob: user.dob,
           image: user.image,
           hire_allow: user.hire_allow,
           phone_number: user.phone_number,
           password: user.password
         }
-        res.render("editprofile", {userData: userData, name_user:req.session.name_user})
+        res.render("editprofile", {userData: userData, name_user:req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user})
       }
     })
   } else {
@@ -258,7 +259,7 @@ http.get('/company/createjob', (req,res) => {
 
 http.post("/company/createjob", (req,res) => {
   if (req.body.job_title && req.body.salary && req.body.education &&
-      req.body.location && req.body.minage &&
+      req.body.location && req.body.minage && req.body.job_type &&
       req.body.maxage && req.body.skill && req.body.language && req.body.exp &&
       req.body.description){
         var jobData = {
@@ -267,6 +268,7 @@ http.post("/company/createjob", (req,res) => {
           location : req.body.location,
           company_email : req.session.email_company,
           description : req.body.description,
+          job_type: req.body.job_type,
           requirement : {
             minage : req.body.minage,
             maxage : req.body.maxage,
@@ -277,7 +279,7 @@ http.post("/company/createjob", (req,res) => {
           }
         }
         Jobs.create({title : jobData.job_title, salary: jobData.salary, location: jobData.location,
-        company_email: jobData.company_email, description : jobData.description,
+        company_email: jobData.company_email, description : jobData.description, job_type: jobData.job_type,
         requirement: {
           minAge : jobData.requirement.minage,
           maxage : jobData.requirement.maxage,
@@ -480,7 +482,7 @@ http.get("/academy", (req,res) => {
 
 http.get("/academy/detail/:id" , (req,res) => {
   var id = req.params.id;
-  Comments.find({}, (err,comment) => {
+  Comments.find({article_id: id}, (err,comment) => {
     if (err) {
       console.log(err)
     } else {

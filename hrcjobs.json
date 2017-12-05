@@ -1,1 +1,0 @@
-{"_id":{"$oid":"5a241a205137d215ab72decf"},"title":"Satpam","salary":200000,"location":"Medan","company_email":"cimbniaga@cimb.co.id","description":"Jaga bank","posted_at":{"$date":"2017-12-03T15:37:04.952Z"},"candidate":[],"requirement":{"minAge":30,"experience":1,"education":"SMA","skill":"Tai Chi","language":"English"},"__v":0}
