@@ -12,7 +12,6 @@ Human Resource Companion website was made to reduce the percentage of jobless pe
 <hr>
 Human Resource Companion was built by a team member mentioned below:
 <br>
-<br>
 
 1.  <b>Audian Taslim </b> as Project Manager.
 2.  <b>Fendy Grata</b> as System Analyst.
@@ -22,7 +21,7 @@ Human Resource Companion was built by a team member mentioned below:
 <br>
 <b>Our Motivation and Vision</b>
 <hr>
-Human Resource <em>“Companion”</em> means that we wanted to be your companion and help you with your job thing and help the company to recruit their certificated and qualified human resources for a temporary time or even permanent. With these prides, we believe that someday, somehow this project will grow well and help the world. 
+<p>Human Resource "Companion" means that we wanted to be your companion and help you with your job thing and help the company to recruit their certificated and qualified human resources for a temporary time or even permanent. With these prides, we believe that someday, somehow this project will grow well and help the world. </p>
 <br>
 <br>
 HRC was build to be one of the successor of <em> <b>“Indonesia Emas 2045” </b></em>Program in purpose to reduce the jobless percentage in Indonesia. HRC Helps the members to be applied as a certificated and trained human resource for many company. To be a member in HRC Company, you just need to fill a simple registration form and submit it. Then you will officially be the member of Human Resource Companion. 
@@ -35,6 +34,9 @@ The Company’s page was build simply for the company to register themselves as 
 
 <em >Time for digital learning</em><br><br>
 Human Resource Companion provide HRC Academy page for member to learn about Security & Administrational. Also about Behaviour Training Information. Nowdays, people needs Behaviour Training to Build their character about how to act, how to communicate and how to think and The Behaviour Training camp is way too expensive for the jobless to join. So, HRC Academy is the right answer because it’s free and more accessible. 
+<br>
+
+<em >No more worry with HRC Quick Hiring</em><br><br>
 
 Human Resource Companion also introduce Quick Hire System for temporary human resource hiring. With Quick Hire System, you could possibly hiring a temporary human resource within 10 minutes. 
 
