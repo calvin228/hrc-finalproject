@@ -131,7 +131,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
     <div class="container">
 
-    <form class="well form-horizontal" >
+    <form method="post" class="well form-horizontal" >
 <fieldset>
 
 <!-- Form Name -->
@@ -156,7 +156,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-  <input  type="date" name="date" placeholder="Date of work" class="form-control"  required>
+  <input  type="date" id="date" name="date" placeholder="Date of work" class="form-control"  required>
     </div>
   </div>
 </div>
@@ -167,7 +167,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <div class="col-md-4 inputGroupContainer">
     <div class="input-group">
   <span class="input-group-addon"><i class="glyphicon glyphicon-usd"></i></span>
-  <input name="salary" placeholder="Salary / day" class="form-control"  type="number">
+  <input name="salary" id="salary" placeholder="Salary / day" class="form-control"  type="number">
     </div>
   </div>
 </div>
@@ -267,6 +267,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
   <script>
   $(function(){
+
     $('#find').on('click', function(){
       var location = $("#location").val();
       var job_title = $("#job_title").val();
@@ -280,7 +281,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
           $(data).each(function(index,value){
             if (data[index].hire_allow === "Yes"){
               $(".findResult").children().remove()
-              $(".findResult").append("<div class='well'><div class='row'><form method='POST' action='/company/quickhire/hire/"+data[index]._id+"'><div class='col-xs-1'><img src='"+data[index].image+"' class='img-responsive img-circle' width=33 height=33></div><div class='col-xs-11'><span>"+data[index].name+"</span><br /><span>"+data[index].location+"</span></div><button type='submit' class='btn btn-primary pull-right' value='Hire'>Hire</button></form></div></div>")
+              $(".findResult").append("<div class='well'><div class='row'><form method='POST' action='/company/quickhire/hire/"+data[index]._id+"?job_title="+job_title+"&date="+date+"&salary="+salary+"'><div class='col-xs-1'><img src='"+data[index].image+"' class='img-responsive img-circle' width=33 height=33></div><div class='col-xs-11'><span>"+data[index].name+"</span><br /><span>"+data[index].location+"</span></div><button type='submit' class='btn btn-primary pull-right' value='Hire'>Hire</button></form></div></div>")
             } else {
               $(".findResult").children().remove()
               $(".findResult").append("<div class='well'><div class='row'><div class='text-center'>No result</div></div></div>")

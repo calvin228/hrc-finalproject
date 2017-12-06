@@ -239,7 +239,7 @@ http.put("/profile/edit", (req,res) => {
     "dob": req.body.dob,
     "phone_number": req.body.phone_number,
     "hire_allow": req.body.hire_allow,
-    "password": req.body.password, 
+    "password": req.body.password,
     "location": req.body.location,
     "quickhire": req.body.quickhire,
     "image": req.body.image
@@ -550,7 +550,7 @@ http.post("/company/quickhire/hire/:id", (req,res) => {
   var salary = req.query.salary;
   console.log(date);
   User.findOneAndUpdate({_id: id}, {$push: {notification: {sender: req.session.name_company,
-    message: "You have been hired by "+req.session.name_company+" as a '"+job_title+"' on "+date+" with payment of "+salary+"/day. Please contact "+req.session.phone_company+" for confirmation"}}}, (err, user)=>{
+    message: "You have been hired by "+req.session.name_company+" as a '"+job_title+"' on "+date+" with payment of Rp."+salary+"/day. Please contact "+req.session.phone_company+" for confirmation"}}}, (err, user)=>{
       if (err){
         console.log(err)
       } else {
