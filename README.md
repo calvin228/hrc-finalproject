@@ -2,7 +2,7 @@
 <b>ABOUT HUMAN RESOURCE COMPANION (HRC) </b>
 <hr>
 <img src='https://i.imgur.com/C7bxsci.png' />
-<br>
+
 <br>
 <b>Introduction </b>
 
@@ -126,6 +126,8 @@ Human Resource Companion also introduce Quick Hire System for temporary human re
 <br>
 <br>
 <b>SIGN IN & SIGN UP FEATURE</b>
+<br>
+<br>
 
 -  If you point your pointer on the Sign In icon, it will hover you the Sign In form and if you don’t have any company account registered here, hit the register blue coloured text and fill the company sign up form then hit register.
 
@@ -161,11 +163,11 @@ Human Resource Companion also introduce Quick Hire System for temporary human re
 
 <b>Further Information</b>
 <hr>
-For more information, please send email to us at <em>hrcindo@gmail.com</em> 
+For more information or if you want to express your critics or comments, please send email to us at <em>hrcindo@gmail.com</em> 
 
 <br>
 <br>
-To view our website directly, please kindly visit <a href="hrc-finalproject.herokuapp.com">here!</a>
+To view our website directly, please kindly visit <a href="http://hrc-finalproject.herokuapp.com/">here!</a>
 
 
 <br>
