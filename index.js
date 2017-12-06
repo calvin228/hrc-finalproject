@@ -82,7 +82,7 @@ http.post("/login/user", (req,res) => {
 });
 
 http.get('/company', (req,res) => {
-  res.render('homecompany', {name_company: req.session.name_company});
+  res.render('homecompany', {name_company: req.session.name_company, image_company: req.session.image_company});
 })
 
 http.get("/login/company", (req,res) => {
@@ -253,7 +253,7 @@ http.get('/company/createjob', (req,res) => {
     res.redirect("/login/company");
 
   } else {
-    res.render("createjob", {name_company: req.session.name_company})
+    res.render("createjob", {name_company: req.session.name_company, image_company: req.session.image_company})
   }
 })
 
@@ -392,7 +392,7 @@ http.get("/company/jobstatus", (req,res) => {
       if (err) {
         console.log(err)
       } else {
-        res.render("jobstatus", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company})
+        res.render("jobstatus", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company, image_company: req.session.image_company})
       }
     })
   } else {
@@ -407,7 +407,7 @@ http.get("/company/jobstatus/:id", (req,res) => {
       if (err) {
         console.log(err)
       } else {
-        res.render("jobstatusdetail", {jobdata: jobs, name_company: req.session.name_company, email_company: req.session.email_company})
+        res.render("jobstatusdetail", {jobdata: jobs, image_company: req.session.image_company, name_company: req.session.name_company, email_company: req.session.email_company})
       }
     })
   }
@@ -522,7 +522,7 @@ http.delete("/academy/details/:article_id/:id", (req,res) => {
 
 http.get('/company/quickhire', (req,res) => {
   if( req.session.name_company) {
-    res.render("quickhire", {name_company: req.session.name_company, email_company: req.session.email_company});
+    res.render("quickhire", {name_company: req.session.name_company, email_company: req.session.email_company, image_company: req.session.image_company});
   } else {
     res.redirect("/login/company");
   }
@@ -577,7 +577,7 @@ http.get("/company/profile", (req,res)=> {
       if (err){
         console.log(err)
       } else {
-        res.render("profilecompany", {name_company: req.session.name_company, email_company: req.session.email_company, companyData: company})
+        res.render("profilecompany", {image_company: req.session.image_company, name_company: req.session.name_company, email_company: req.session.email_company, companyData: company})
       }
     })
   }
@@ -600,7 +600,7 @@ http.get("/company/profile/edit", (req,res) => {
           account_name: company.account_name,
           password: company.password
         }
-        res.render("editprofilecompany", {name_company: req.session.name_company, email_company: req.session.email_company, companyData: companyData})
+        res.render("editprofilecompany", {image_company: req.session.image_company, name_company: req.session.name_company, email_company: req.session.email_company, companyData: companyData})
       }
     })
   } else {

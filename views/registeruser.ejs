@@ -4,20 +4,84 @@
     <meta charset="utf-8">
     <title>HRC - Registration</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <style>
+  #success_message{ display: none;}
+  </style>
+
+
+
   </head>
   <body>
-    <form method='post' action="/register/user">
-      <label>Full Name</label><br />
-      <input type="text" name='name' required/><br />
-      <label>Email</label><br />
-      <input type='email' name="email" required/><br />
-      <label>Gender</label><br />
-      <input type="radio" name="gender" value="male" required>Male<br />
-      <input type="radio" name="gender" value="female">Female<br />
-      <label>Address</label>
-      <textarea type="address" name='address' required></textarea>
-      <label>Current Location</label><br />
-      <select name="location" required>
+
+    <br>
+    <br>
+
+<div class="container">
+
+    <form class="well form-horizontal" action="/register/user" method="post"  id="regis_form" >
+<fieldset>
+
+<!-- Form Name -->
+<legend>Register Yourself</legend>
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Full Name</label>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+  <input  type="text" name="name" placeholder="Full Name" class="form-control"  required>
+    </div>
+  </div>
+</div>
+
+  <!-- Text input-->
+       <div class="form-group">
+  <label class="col-md-4 control-label">E-Mail</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+  <input name="email" placeholder="E-Mail Address" class="form-control"  type="email">
+    </div>
+  </div>
+</div>
+
+<!-- radio checks -->
+ <div class="form-group">
+                        <label class="col-md-4 control-label">Gender</label>
+                        <div class="col-md-4">
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="Male" required/> Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gender" value="Female" /> Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+<!-- ADDRESS -->
+
+                    <div class="form-group">
+  <label class="col-md-4 control-label">Address</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-home"></i></span>
+  <input name="address" placeholder="Address" class="form-control" type="address">
+    </div>
+  </div>
+</div>
+
+<!-- CURRENT LOCATION -->
+<div class="form-group">
+        <label class="col-md-4 control-label">Current Location</label>
+        <div class="col-md-4 selectContainer">
+
+            <select name="location" required>
         <option value="Medan">Medan</option>
         <option value="Binjai">
           Binjai
@@ -25,21 +89,117 @@
         <option value="Belawan">
           Belawan
         </option>
-      </select><br />
-      <label>Date Of Birth</label><br />
-      <input type="date" name="dob" required/><br />
-      <label>Quick Hire Job</label><br />
-      <select name="quickhire" required>
+      </select>
+
+        </div>
+    </div>
+
+
+  <!-- Date input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Date of birth</label>
+  <div class="col-md-4 inputGroupContainer">
+  <div class="input-group">
+  <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+  <input  type="date" name="dob" placeholder="Date of birth" class="form-control"  required>
+    </div>
+  </div>
+</div>
+
+    <!-- QUICK HIRE JOB-->
+
+<div class="form-group">
+        <label class="col-md-4 control-label">Quick Hire Job</label>
+        <div class="col-md-4 selectContainer">
+
+          <select name="quickhire" required>
         <option value="Satpam">Satpam</option>
         <option value="Bodyguard">Bodyguard</option>
-      </select><br />
-      <label>Phone Number</label><br />
-      <input type="tel" name="phone" required /><br />
-      <label>Image (URL)</label><br />
-      <input type="url" name="image" required  /><br />
-      <label>Passsword</label><br />
-      <input type="password" name='password' /><br />
-      <input type="submit" name="register" value="register"  required/>
-    </form>
+      </select>
+
+        </div>
+    </div>
+
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Phone Number</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+  <input name="phone" placeholder="Phone Number" class="form-control" type="tel" required>
+    </div>
+  </div>
+</div>
+
+<!-- IMAGE URL input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Image URL</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-picture"></i></span>
+  <input name="image" placeholder="Image URL" class="form-control" type="url" required>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Text input-->
+
+<div class="form-group">
+  <label class="col-md-4 control-label">Password</label>
+    <div class="col-md-4 inputGroupContainer">
+    <div class="input-group">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+  <input name="password" placeholder="Password" class="form-control"  type="password">
+    </div>
+  </div>
+</div>
+
+
+<!-- Button -->
+<div class="form-group">
+  <label class="col-md-4 control-label"></label>
+  <div class="col-md-4">
+
+    <button type="submit" class="btn btn-success" name="register" value="register" required>Register <span class="glyphicon glyphicon-send"></span></button>
+     <a href="/" class="btn btn-danger">Cancel </a>
+
+  </div>
+</div>
+
+
+</fieldset>
+</form>
+
+
+
+</div>
+    </div><!-- /.container -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   </body>
 </html>
