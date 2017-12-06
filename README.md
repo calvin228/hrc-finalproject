@@ -1,7 +1,9 @@
 
 <b>ABOUT HUMAN RESOURCE COMPANION (HRC) </b>
 <hr>
-
+<img src='https://i.imgur.com/aJTQYLw.png' />
+<br>
+<br>
 <b>Introduction </b>
 
 Human Resource Companion website was made to reduce the percentage of jobless person in the world especially in Indonesia. For the first phase, we decided to implement our project in 3 places in North Sumatera like Medan, Binjai and Belawan.
@@ -50,7 +52,7 @@ Human Resource Companion also introduce Quick Hire System for temporary human re
 
 <b>USER PAGE </b>
 
-<b>A. Nav Bars </b>
+<b>NAVIGATION BAR</b>
 
 -  <b>Home Nav bar</b> will take you directly to the home page.
 -  <b>Opportunity Nav bar</b> will carry you to the list of vacancies.
@@ -60,49 +62,51 @@ Human Resource Companion also introduce Quick Hire System for temporary human re
 -  <b>Sign In Icon</b> on the right side or the nav bars will hover you the sign in form.
 
 
-SIGN IN & SIGN UP FEATURE : 
+<b>SIGN IN & SIGN UP FEATURE</b>
 
-If you point your pointer on the Sign In icon, it will hover you the Sign In form and if you don’t have any account registered here, hit the register blue coloured text and fill the sign up form then hit register.
+-  If you point your pointer on the <b>Sign In icon</b>, it will hover you the Sign In form and if you don’t have any account registered here, hit the register blue coloured text and fill the sign up form then hit register.
+<br>
+<br>
 
+<b>VIEW MY PROFILE</b>
 
-VIEW MY PROFILE : 
-
-After you Signed In, point your pointer on the right side or the nav bars and it will hover you a simple window filled with three buttons mentioned as : View my profile, Messages and Log out. if you hit the View My profile button, it will bring you to the profile page where your informations were shown and there is one button placed below your profile informations written “Update your profile here” and if you click it, it will take you back to the update form and after you change your mistaken data, hit update.
-
-
-MESSAGES : 
-
-After you Signed In, point your pointer on the right side or the nav bars and it will hover you a simple window filled with three buttons mentioned as : View my profile, Messages and Log out. If you hit the Messages button, it will brings you to the notification page where the description of your activity were shown.
+-  After you Signed In, point your pointer on the right side or the nav bars and it will hover you a simple window filled with three buttons mentioned as : View my profile, Messages and Log out. if you hit the View My profile button, it will bring you to the profile page where your informations were shown and there is one button placed below your profile informations written “Update your profile here” and if you click it, it will take you back to the update form and after you change your mistaken data, hit update.
 
 
-LOG OUT : 
-After you Signed In, point your pointer on the right side or the nav bars and it will hover you a simple window filled with three buttons mentioned as : View my profile, Messages and Log out. if you hit the Log Out button, it will log you out from your account.
+<b>MESSAGES</b>
+
+-  After you Signed In, point your pointer on the right side or the nav bars and it will hover you a simple window filled with three buttons mentioned as : View my profile, Messages and Log out. If you hit the Messages button, it will brings you to the notification page where the description of your activity were shown.
 
 
-HOME PAGE : 
-
-In the Home Page, you could see the testimonials of our human resources from the company. The testimonials were sent by the company right to us for testimonials. 
-
-
-OPPORTUNITY PAGE : 
-
-In the Opportunity Page, user could possibly check the list of job vacancies the company made in our website or even search for the job you’re into with our search field then hit search button. After you find the job you are into, hit “See the Details” button and the description will be shown. The description contains job description, salary and location of the opportunity. If the job matches you, hit the apply button and the “apply” button will changed to “applied”.
+<b>LOG OUT </b>
+-  After you Signed In, point your pointer on the right side or the nav bars and it will hover you a simple window filled with three buttons mentioned as : View my profile, Messages and Log out. if you hit the Log Out button, it will log you out from your account.
 
 
-ACADEMY PAGE : 
+<b>HOME PAGE </b> 
 
-In the Academy Page, you could see the tips and tricks posted in the page. To see the details, hit the more button. After reading the tips and tricks, you could post your comment right on the article but make sure that you have already signed in and type on the comment box and hit submit. 
+-  In the Home Page, you could see the testimonials of our human resources from the company. The testimonials were sent by the company right to us for testimonials. 
 
 
-ABOUT US PAGE : 
+<b>OPPORTUNITIES PAGE</b>
+
+-  In the Opportunities Page, user could possibly check the list of job vacancies the company made in our website or even search for the job you’re into with our search field then hit search button. After you find the job you are into, hit “See the Details” button and the description will be shown. The description contains job description, salary and location of the opportunity. If the job matches you, hit the apply button and the “apply” button will changed to “applied”.
+
+
+<b>ACADEMY PAGE</b>
+
+-  In the Academy Page, you could see the tips and tricks posted in the page. To see the details, hit the more button. After reading the tips and tricks, you could post your comment right on the article but make sure that you have already signed in and type on the comment box and hit submit. 
+
+
+<b>ABOUT US PAGE</b>
 
 In the About Us Page, you could see the authors of HRC company. Below the Authors, a map appears to show where the HRC company was placed.
 
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-COMPANY PAGE
+<hr>
+<br>
+<b>COMPANY PAGE</b>
 
 
 
