@@ -2,70 +2,142 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>HRC - <%= jobdata.title %></title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <script
-			  src="https://code.jquery.com/jquery-3.2.1.slim.js"
-			  integrity="sha256-tA8y0XqiwnpwmOIl3SGAcFl2RvxHjA8qp0+1uCGmRmg="
-			  crossorigin="anonymous"></script>
-    <script>
+     <title>HRC - Welcome <%= name_company %></title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 
-    </script>
-  </head>
-  <body>
-    <%- include partials/headercompany %>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="nav navbar-nav navbar-right">
-          <li class="active">
-            <a href="/company">Home</a>
-          </li>
-          <li>
-            <a href="/company/createjob">Create Jobs</a>
-          </li>
-          <li>
-            <a href="/company/jobstatus">Job status</a>
-          </li>
-          <li>
-            <a href="/about">About</a>
-          </li>
-          <li>
-            <a href="#">Contact</a>
-          </li>
-        </div>
-      </div>
-    </nav>
-    <div class="row">
-      <h4><%= jobdata.title %></h4>
-      <p>
-        <%= jobdata.description %>
-      </p>
-      <% for (i = 0; i < jobdata.candidate.length ; i++) { %>
-        <% if (jobdata.candidate[i].status === "In Process") { %>
-          <div class="col-xs-8">
-            <span><%= jobdata.candidate[i].name %></span>
-            <span><%= jobdata.candidate[i].email %></span>
-          </div>
-          <form method="post" action="/company/jobstatus/<%= jobdata._id %>/<%= jobdata.candidate[i].email %>">
-          <div class="col-xs-2">
-            <select name="decision">
-              <option value="Process to Interview">
-                Process to Interview
-              </option>
-              <option value="Reject">
-                Reject
-              </option>
-            </select>
-          </div>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+   <meta name="keywords" content="Soft Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+ <script src="https://code.jquery.com/jquery-3.2.1.js"
+           integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+           crossorigin="anonymous"></script>
+   <script>
+     addEventListener("load", function () {
+       setTimeout(hideURLbar, 0);
+     }, false);
 
-          <div class="col-xs-2">
-            <button type="submit" name="process" value="Process">Process</button>
-          </div>
-          </form>
-        <% } else { %>
+     function hideURLbar() {
+       window.scrollTo(0, 1);
+     }
+   </script>
+   <!--//tags -->
+   <link href="/css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+   <link href="/css/style.css" rel="stylesheet" type="text/css" media="all" />
 
-        <% } %>
-      <% } %>
-    </div>
+   <link href="/css/font-awesome.css" rel="stylesheet">
+   <!-- //for bootstrap working -->
+   <link href="//fonts.googleapis.com/css?family=Work+Sans:200,300,400,500,600,700" rel="stylesheet">
+   <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
+       rel='stylesheet' type='text/css'>
+ </head>
+ <body>
+ <!-- header -->
+
+   <div class="header" id="home">
+     <div class="content white agile-info">
+       <nav class="navbar navbar-default" role="navigation">
+         <div class="container">
+           <div class="navbar-header">
+             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+           <span class="sr-only">Toggle navigation</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+             <a class="navbar-brand" href="/">
+               <img src="/images/logo.png" width="120" height="50">
+             </a>
+           </div>
+           <!--/.navbar-header-->
+           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+             <nav class="link-effect-2" id="link-effect-2">
+               <ul class="nav navbar-nav">
+                 <li class="active"><a href="/company" class="effect-3">Home</a></li>
+                 <li class="dropdown">
+
+                   <a href="/company/createjob" class="effect-3">Create Jobs</a>
+
+                 </li>
+                 <li class="dropdown">
+                   <a  href="/company/quickhire" class="effect-3">Quick Hire</a>
+
+                 </li>
+
+
+                 <li><a href="/company/jobstatus" class="effect-3">Job Status</a></li>
+
+
+
+
+
+           <li>
+           <div class="dropdown" >
+               <img  src="/images/profile-icon.png" width="33" height="33" >
+
+
+             <div class="dropdown-content">
+
+                <h3>My Profile</h3>
+
+             <hr>
+                 <% include partials/headercompany %>
+             </div>
+           </div>
+
+           </li>
+
+
+
+
+               </ul>
+             </nav>
+           </div>
+
+
+           <!--/.navbar-collapse-->
+           <!--/.navbar-->
+         </div>
+       </nav>
+     </div>
+   </div>
+ <hr style="margin-bottom: 0;">
+ <div class="container">
+   <div class="well">
+     <div class="row">
+       <h4><%= jobdata.title %></h4>
+       <p>
+         <%= jobdata.description %>
+       </p>
+       <% for (i = 0; i < jobdata.candidate.length ; i++) { %>
+         <% if (jobdata.candidate[i].status === "In Process") { %>
+           <div class="col-xs-8">
+             <span><%= jobdata.candidate[i].name %></span>
+             <span><%= jobdata.candidate[i].email %></span>
+           </div>
+           <form method="post" action="/company/jobstatus/<%= jobdata._id %>/<%= jobdata.candidate[i].email %>">
+           <div class="col-xs-2">
+             <select class="form-control" name="decision">
+               <option value="Process to Interview">
+                 Process to Interview
+               </option>
+               <option value="Reject">
+                 Reject
+               </option>
+             </select>
+           </div>
+
+           <div class="col-xs-2">
+             <button type="submit" name="process" value="Process">Process</button>
+           </div>
+           </form>
+         <% } else { %>
+
+         <% } %>
+       <% } %>
+     </div>
+   </div>
+ </div>
+
   </body>
 </html>
