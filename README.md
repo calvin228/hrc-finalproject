@@ -41,15 +41,14 @@ Human Resource Companion provide HRC Academy page for member to learn about Secu
 Human Resource Companion also introduce Quick Hire System for temporary human resource hiring. With Quick Hire System, you could possibly hiring a temporary human resource within 10 minutes. 
 <br>
 <br>
+<br>
 
-<b>Features of Human Resource Companion </b>
+<b>HRC Features</b>
 <hr>
 
 
 
-
-
-USER PAGE  
+<mark>USER PAGE </mark>
 
 
 
