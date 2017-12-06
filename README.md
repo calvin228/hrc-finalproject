@@ -12,6 +12,7 @@ Human Resource Companion website was made to reduce the percentage of jobless pe
 <hr>
 Human Resource Companion was built by a team member mentioned below:
 <br>
+<br>
 
 1.  <b>Audian Taslim </b> as Project Manager.
 2.  <b>Fendy Grata</b> as System Analyst.
@@ -47,19 +48,16 @@ Human Resource Companion also introduce Quick Hire System for temporary human re
 <hr>
 
 
+<b>USER PAGE </b>
 
-<mark>USER PAGE </mark>
+<b>A. Nav Bars </b>
 
-
-
-Nav Bars : 
-
-Home Nav bar will take you directly to the home page.
-Opportunity Nav bar will carry you to the list of vacancies.
-Academy Nav bar was meant to brings you the information listed on the Academy page.
-About Us Nav bar carry you to met the author of HRC Website.
-Company Nav bar will change the website to the Company Mode.
-Sign In Icon on the right side or the nav bars will hover you the sign in form.
+-  <b>Home Nav bar</b> will take you directly to the home page.
+-  <b>Opportunity Nav bar</b> will carry you to the list of vacancies.
+-  <b>Academy Nav bar</b> was meant to brings you the information listed on the Academy page.
+-  <b>About Us Nav bar</b> carry you to met the author of HRC Website.
+-  <b>Company Nav bar</b> will change the website to the Company Mode.
+-  <b>Sign In Icon</b> on the right side or the nav bars will hover you the sign in form.
 
 
 SIGN IN & SIGN UP FEATURE : 
