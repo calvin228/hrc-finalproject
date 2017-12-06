@@ -31,7 +31,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- header -->
 	<div class="header" id="home">
 		<div class="content white agile-info">
-			<nav class="navbar navbar-default" data-spy="affix" data-offset-top="197" role="navigation">
+			<nav class="navbar navbar-default" role="navigation">
 				<div class="container">
 					<div class="navbar-header">
 						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -48,19 +48,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 						<nav class="link-effect-2" id="link-effect-2">
 							<ul class="nav navbar-nav">
-								<li><a href="/" class="effect-3">Home</a></li>
+								<li ><a href="/" class="effect-3">Home</a></li>
 								<li class="dropdown">
 
 									<!-- INGAT KSH NAMA HTML KEMANA-->
 
-									<a href="/jobs" class="effect-3">Opportunities</a>
+									<a href="/opportunities" class="effect-3">Opportunities</a>
 
 								</li>
-								<li class="dropdown" class="active">
-									<a href="/academy" class="dropdown-toggle effect-3" data-toggle="dropdown">Academy<b class="caret"></b></a>
+								 <li class="active"><a href="/academy" class="effect-3">Academy</a></li>
 
-								</li>
+								
 								<li><a href="/about" class="effect-3">About Us</a></li>
+
+								<li class="dropdown">
+									<a  href="/company" class="effect-3" style="color: 	#0080ff">|  Company</a>
+									
+								</li>
 
 					<li>
 					<div class="dropdown" >
@@ -69,12 +73,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<% } else { %>
 							<img src="<%= image_user %>" width="33" height="33">
 						 <% } %>
+
  						<div class="dropdown-content">
 
  						<h3>Sign In</h3>
 
  						<hr>
-  							<%- include partials/header %>
+  							<% include partials/header %>
 						</div>
 					</div>
 
@@ -95,7 +100,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	<div class="inner_page_agile">
 		<h3>Academy Information</h3>
-		<p>Add Some Short Description</p>
+		<p>Read. Understand. Apply</p>
 
 	</div>
 	<!--//banner -->
@@ -104,7 +109,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<div class="inner_breadcrumb">
 
 			<ul class="short_w3ls"_w3ls>
-				<li><a href="/">Home</a><span>|</span></li>
+				<li><a href="/academy"> < Back</a><span>|</span></li>
 				<li>Academy Information</li>
 			</ul>
 		</div>
@@ -114,17 +119,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="inner_content_info_agileits">
 		<div class="container">
 			<div class="tittle_head_w3ls">
-				<h3 class="tittle">Some More Info </h3>
+				<h3 class="tittle" style="float: left;">Jenjang Pelatihan Satpam</h3>
 			</div>
 			<div class="inner_sec_grids_info_w3ls">
 				<div class="col-md-8 job_info_left">
 					<div class="single-left1">
 						<img src="images/banner3.jpg" alt=" " class="img-responsive" />
-						<h3>Jenjang pelatihan satpam ada 3 tingkat yaitu :</h3>
 						<ul>
-							<li><span class="fa fa-user" aria-hidden="true"></span><a href="#">Michael Smith</a></li>
-							<li><span class="fa fa-tag" aria-hidden="true"></span><a href="#">5 Tags</a></li>
-							<li><span class="fa fa-envelope-o" aria-hidden="true"></span><a href="#">5 Comments</a></li>
+							<li style="    padding-left: 450px;
+    padding-top: 20px;"><span class="fa fa-user" aria-hidden="true"></span><a href="#">Ahmad Suteja</a></li>
 						</ul>
 						<p>
 						1.Dasar (Gada Pratama), merupakan pelatihan dasar wajib bagi calon anggota satpam. Lama pelatihan empat minggu dengan pola 232 jam pelajaran. Materi pelatihan a.l. Interpersonal Skill; Etika Profesi; Tugas Pokok, Fungsi dan Peranan Satpam, Kemampuan Kepolisian Terbatas; Bela Diri; Pengenalan Bahan Peledak; Barang Berharga dan Latihan Menembak; Pengetahuan Narkotika, Psikotropika dan Zat Adiktif Lainnya; Penggunaan Tongkat Polri dan Borgol; Pengetahuan Baris Berbaris dan Penghormatan;
@@ -137,18 +140,7 @@ Selain lembaga pendidikan kepolisian negara seperti Sekolah Polisi Negara, hanya
 						<h3 class="single">Our Recent Comments</h3>
 						<div class="comments-grids">
 							<div class="comments-grid">
-								<div class="comments-grid-left">
-									<img src="images/pf1.jpg" alt=" " class="img-responsive">
-								</div>
-								<div class="comments-grid-right">
-									<h4><a href="#">Michael Crisp</a></h4>
-									<ul>
-										<li>5 Nov 2017 <i>|</i></li>
-										<li><a href="#">Reply</a></li>
-									</ul>
-									<p>Ut ex metus, ornare ac ultricies sit amet, auctor a elit. Praesent sit amet scelerisque massa. Duis porta risus
-										id urna finibus aliquet.</p>
-								</div>
+								
 								<div class="clearfix"> </div>
 							</div>
 							<% for(i = commentData.length-1; i >=  0; i--) { %>
@@ -157,17 +149,25 @@ Selain lembaga pendidikan kepolisian negara seperti Sekolah Polisi Negara, hanya
 										<div class="comments-grid-left">
 											<img src="<%= commentData[i].person.image %>" alt=" " class="img-responsive">
 										</div>
-										<div class="comments-grid-right">
-											<h4><%= commentData[i].person.name %></h4>
-											<ul>
-												<li><%= commentData[i].posted_at %><i>|</i></li>
-												<li><a href="#">Reply</a></li>
-											</ul>
-											<p><%= commentData[i].comment %></p>
+										<!--COMMENT-->
+                    <div class="comments-grid-right">
+                       <div class="panel panel-info">
+                        <div class="panel-heading">
+                          <h3><b><%= commentData[i].person.name %></b></h3>
+                        </div>
+                         <div class="panel-body">
+                           <ul>
+                        <li><%= commentData[i].posted_at.toDateString() %><i></i></li>
+                      </ul>
+                      <p><%= commentData[i].comment %></p>
+
+                         </div>
+                      </div>
 										</div>
 										<div class="clearfix"> </div>
 										<form method="post" action="/academy/details/1/<%= commentData[i]._id %>?_method=DELETE">
-											<button type="submit" class="btn btn-danger pull-right" value="Delete Comment">Delete Comment</button>
+										<br>
+											<button type="submit" value="Delete Comment" class="btn btn-primary">Delete Comment</button>
 										</form>
 									</div>
 			          <% } else { %>
@@ -176,30 +176,29 @@ Selain lembaga pendidikan kepolisian negara seperti Sekolah Polisi Negara, hanya
 											<img src="<%= commentData[i].person.image %>" alt=" " class="img-responsive">
 										</div>
 										<div class="comments-grid-right">
-											<h4><%= commentData[i].person.name %></h4>
-											<ul>
-												<li><%= commentData[i].posted_at.toDateString() %><i>|</i></li>
-												<li><a href="#">Reply</a></li>
-											</ul>
-											<p><%= commentData[i].comment %></p>
+
+                    
+											 <!--COMMENT-->
+                      <div class="panel panel-info">
+                        <div class="panel-heading">
+                          <h3><b><%= commentData[i].person.name %></b></h3>
+                        </div>
+                         <div class="panel-body">
+                           <ul>
+                        <li><%= commentData[i].posted_at.toDateString() %><i></i></li>
+                      </ul>
+                      <p><%= commentData[i].comment %></p>
+
+                         </div>
+                      </div>
 										</div>
 										<div class="clearfix"> </div>
 									</div>
 			          <% } %>
 							<% } %>
 							<div class="comments-grid">
-								<div class="comments-grid-left">
-									<img src="images/pf2.jpg" alt=" " class="img-responsive">
-								</div>
-								<div class="comments-grid-right">
-									<h4><a href="#">Adam Lii</a></h4>
-									<ul>
-										<li>8 Nov 2017 <i>|</i></li>
-										<li><a href="#">Reply</a></li>
-									</ul>
-									<p>Ut ex metus, ornare ac ultricies sit amet, auctor a elit. Praesent sit amet scelerisque massa. Duis porta risus
-										id urna finibus aliquet.</p>
-								</div>
+								
+								
 								<div class="clearfix"> </div>
 							</div>
 							<div class="w3layouts_mail_grid single">
@@ -215,41 +214,7 @@ Selain lembaga pendidikan kepolisian negara seperti Sekolah Polisi Negara, hanya
 						</div>
 					</div>
 
-					<div class="single-left1">
-						<img src="images/banner3.jpg" alt=" " class="img-responsive" />
-						<h3>TUGAS DAN  FUNGSI KEAMANAN</h3>
-						<ul>
-							<li><span class="fa fa-user" aria-hidden="true"></span><a href="#">Michael Smith</a></li>
-							<li><span class="fa fa-tag" aria-hidden="true"></span><a href="#">5 Tags</a></li>
-							<li><span class="fa fa-envelope-o" aria-hidden="true"></span><a href="#">5 Comments</a></li>
-						</ul>
-						<p>
-						PENGATURAN.<br>
-Pengaturan disini dilihat dari medan yang diamankan, fungsi tambahan yang di keluarkan oleh perusahaan atau pimpinan keamanan. Dan dilihat dari kebutuhan perusahaan
-<br>PENJAGAAN<br>
-Setiap keamanan memiliki fungsi dan tugas yang sama secara umum menjaga dan mengamankan semua asset, karyawan, atasan dan keamanan kerja dilingkungan kerja atau tempat-tempat tertentu sesuai dengan ploting yang diatur oleh perusahaan atau atasan. Dan dituntut seorang keamanan yang memiliki tanggung jawab, kedisiplinan, kejujuran tinggi.
-<br>PENGAWALAN<br>
-Melakukan pengawalan pada atasan atau asset perusahaan yang dibawa atau dipindahkan, atau diambil dari tempat lain yang diperlukan perusahaan atau yang dikeluarkan oleh perusahaan. Dan bertanggung jawab penuh terhadap keamanan dan kenyamanan selama dalam perjalanan sampai tujuan yang dimaksut.
-<br> PATROLI<br>
-Tugas ini diwajibkan kepada setiap keamanan yang ditempatkan disetiap plot yang sudah diatur oleh atasan atau yang sudah ditunjuk oleh atasan  keamanan guna melakukan kegiatan ini. Dan dapat melakukan pencegahan apabila dalam melakukan patroli mendapati hal-hal yang mencurigagan atau janggal dan melakukan pencekalan apabila terdapat hal-hal yang merupakan suatu pelanggaran didalam sistem pengamanan.
-<br>PENYIDIKAN DAN PENYELIDIKAN<br>
-Kemampuan penyidikan dan penyelidikan setiap kejadian harus dimiliki oleh setiap personil sebelum ditangani oleh pihak yang berwajib, fungsi supaya dapat menggantisipasi sebelumnya untuk tidak terjadi hal-hal yang demikian
-<br>PELAPORAN<br>
-Seorang keamanan harus dapat membuat laporan kepada atasan dan harus melaporkan segala sesuatu yang dianggap perlu untuk dilaporkan dan untuk diketahui oleh atasan atau pihak perusahaan. Dan dapat mengetahui kejadian tersebut penting atau tidaknya untuk dilaporkan atau dimutasikan.
-<br>MENGAMANKAN<br>
-Keamanan mempunyai hak untuk mengamankan pelaku dan mengamankan barang bukti atau mencari barang bukti serta dapat meminta saksi-saksi yang benar mengetahui kejadian dan wajib menjadi saksi apabila personil tersebut mengetahui kejadian tersebut.
-SENYUM, SAPA, SALAM, TINDAK { S³T}
-<br>SENYUM<br>
-Biasakan senyum untuk menerima tamu, karena dengan senyum tamu akan merasa dihargai dan dihormati.
-<br>SAPA<br>
-Sapalah tamu sebelum anda disapa, Tanya keperluannya dengan sopan, sampaikan hal tersebut kepada yang dituju oleh tamu, diperbolehkan masuk atau tidak, apabila diperbolehkan, arahkan tamu tersebut kepada yang bersangkutan. Dan apabila tidak lakukan penolakan secara baik-baik dengan alasan yang tidak menyinggung perasaan tamu. Hal tersebut diatas biasanya digunakan apabila yang bersangkutan bertugas dipos jaga kantor atau didalam kantor.
-<br>SALAM<br>
-Ucapkan salam yang bersifat umum kepada tamu. Perlakukan tamu dengan sebaik-baiknya.
-<br>Ucapan-ucapan<br>
-Selamat siang,. Apa ada yang bisa saya Bantu,. Trimakasih,. Maaf pak,. Silahkan pak  / bu
-<br>TINDAK<br>
-Apa bila ada tamu yang melanggar ketertiban didalam lingkungan perusahaan atau kantor terlebih dahulu dilakukan teguran secara baik-baik, dinasehati dan apabila yang bersangkutan masih melakukan dan tidak mengindahkan teguran tersebut amankan……….</p>
-					</div>
+					
 				</div>
 
 
@@ -273,9 +238,9 @@ Apa bila ada tamu yang melanggar ketertiban didalam lingkungan perusahaan atau k
 				<a href="/about">More »</a>
 				</p>
 			</div>
-		
-			<div class="col-md-4 footer_grid">
-				<h3></h3>
+			
+			<div class="col-md-6 footer_grid" style="padding-left: 250px">
+				<h3>Contact Us</h3>
 				<ul class="address">
 					<li><i class="fa fa-map-marker" aria-hidden="true"></i>HRC Head Office<span>Jalan Kapten Maulana Lubis No. 88</span><span>Medan, Indonesia</span></li>
 					<li><i class="fa fa-envelope" aria-hidden="true"></i><a href="mailto:info@example.com">hrcindo@gmail.com</a></li>
@@ -293,7 +258,7 @@ Apa bila ada tamu yang melanggar ketertiban didalam lingkungan perusahaan atau k
 				<div class="col-md-9 footer_bottom_grid">
 					<div class="footer_bottom1">
 						<a class="navbar-brand" href="/">
-							<img src="images/logo2.png" width="100" height="45">
+							<img src="/images/logo2.png" width="100" height="45">
 						</a>
 					</div>
 				</div>

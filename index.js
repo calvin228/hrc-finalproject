@@ -76,7 +76,7 @@ http.post("/login/user", (req,res) => {
 
     } else {
       // TODO : CHANGE THIS ONE TO MESSAGE
-      res.send('invalid login <br><a href="/">back</a>');
+      res.send('<div style="margin-left=300px;"> <br>You have not registered yet! <br> Please register first! <br><br> <button ><a href="/register/user">Register</a></button> <button ><a href="/">Back</a></button></div>');
     }
   })
 });
@@ -219,7 +219,8 @@ http.get("/profile/edit", (req,res) => {
           image: user.image,
           hire_allow: user.hire_allow,
           phone_number: user.phone_number,
-          password: user.password
+          password: user.password,
+          quickhire: user.quickhire
         }
         res.render("editprofile", {userData: userData, name_user:req.session.name_user, email_user: req.session.email_user, image_user: req.session.image_user})
       }
@@ -236,9 +237,12 @@ http.put("/profile/edit", (req,res) => {
   User.findOneAndUpdate({email: req.session.email_user}, { "$set": {
     "email": req.body.email,
     "dob": req.body.dob,
-    "phone_number": req.body.phone,
+    "phone_number": req.body.phone_number,
     "hire_allow": req.body.hire_allow,
-    "password": req.body.password
+    "password": req.body.password, 
+    "location": req.body.location,
+    "quickhire": req.body.quickhire,
+    "image": req.body.image
   }}, (err,user) => {
     if (err) {
       console.log(err);
@@ -513,7 +517,7 @@ http.delete("/academy/details/:article_id/:id", (req,res) => {
     if (err){
       console.log(err)
     } else {
-      res.redirect('/academy');
+      res.redirect("/academy/detail/"+article_id);
     }
   })
 })
@@ -539,8 +543,8 @@ http.get('/api/company/quickhire', (req,res) => {
   })
 })
 
-http.post("/company/quickhire", (req,res) => {
-  var id = req.query.id;
+http.post("/company/quickhire/hire/:id", (req,res) => {
+  var id = req.params.id;
   var job_title = req.query.job_title;
   var date = req.query.date;
   var salary = req.query.salary;
